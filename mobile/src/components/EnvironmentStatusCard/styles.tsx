@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         display: 'flex',
         flexDirection: 'column',
-        gap: -15,
+        gap: -13,
     },
     statusCardBackground__red: {
         backgroundColor: color.red,

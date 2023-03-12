@@ -9,7 +9,7 @@ const color = {
     gray: '#A2A9B8',
     focusGreen: '#73B94E',
     lightText: 'white',
-    darkText: 'dark',
+    darkText: '#000000',
 }
 
 export default color

@@ -21,7 +21,7 @@ const DoorCard = (): JSX.Element => {
                     <DoorIcon />
                 </View>
                 <Text style={[text.heavy, text.size_medium, text.color_white]}>
-                    {status ? 'LOCK' : 'UNLOCK'}
+                    {status ? 'KHÓA' : 'MỞ KHÓA'}
                 </Text>
             </View>
             <Switch

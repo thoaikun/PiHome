@@ -6,7 +6,10 @@ import WaterIcon from '../../../assets/svg/water_icon.svg'
 import text from '../../styles/text'
 import styles from './styles'
 
-const EnvironmentStatusCard = (): JSX.Element => {
+const EnvironmentStatusCard = (props: {
+    temperature: number
+    humidity: number
+}): JSX.Element => {
     return (
         <View style={styles.container}>
             <View style={styles.dateContainer}>
@@ -35,7 +38,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                                 text.color_white,
                             ]}
                         >
-                            23 C
+                            {props.temperature ? props.temperature : ''} &deg;C
                         </Text>
                         <Text
                             style={[
@@ -44,7 +47,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                                 text.color_white,
                             ]}
                         >
-                            Temperature
+                            Nhiệt độ
                         </Text>
                     </View>
                 </View>
@@ -65,7 +68,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                                 text.color_white,
                             ]}
                         >
-                            30 %
+                            {props.humidity ? props.humidity : ''} %
                         </Text>
                         <Text
                             style={[
@@ -74,7 +77,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                                 text.color_white,
                             ]}
                         >
-                            Humidity
+                            Độ ẩm
                         </Text>
                     </View>
                 </View>

@@ -1,8 +1,11 @@
 import { useFonts } from 'expo-font'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import Button from './src/components/Button/Button'
 import DoorCard from './src/components/DoorCard/DoorCard'
 import EnvironmentStatusCard from './src/components/EnvironmentStatusCard/EnvironmentStatusCard'
+import NotifyCard from './src/components/NotifyCard/NotifyCard'
+import text from './src/styles/text'
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
@@ -20,8 +23,14 @@ export default function App() {
     }
     return (
         <View style={style.main}>
-            <EnvironmentStatusCard />
+            <EnvironmentStatusCard temperature={30} humidity={80} />
             <DoorCard />
+            <NotifyCard type='warning' message='Có người đột nhập' />
+            <Button extend>
+                <Text style={[text.bold, text.size_medium, text.color_white]}>
+                    Login
+                </Text>
+            </Button>
         </View>
     )
 }
@@ -32,5 +41,6 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         gap: 20,
+        backgroundColor: '#F6F2DB',
     },
 })
