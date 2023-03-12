@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         backgroundColor: color.primary,
     },
+    onPress: {
+        backgroundColor: color.focusPrimary,
+    },
     extend: {
         paddingHorizontal: '30%',
     },

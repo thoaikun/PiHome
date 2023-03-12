@@ -8,6 +8,7 @@ const color = {
     yellow: '#E1D45B',
     gray: '#A2A9B8',
     focusGreen: '#73B94E',
+    focusPrimary: '#5E68D4',
     lightText: 'white',
     darkText: '#000000',
 }
