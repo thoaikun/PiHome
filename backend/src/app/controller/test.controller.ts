@@ -15,10 +15,6 @@ class TestController implements Subscriber {
     public update(context: string): void {
         this.socket.emit('controller', context)
     }
-
-    public getSocket(): Socket {
-        return this.socket
-    }
 }
 
 export default TestController
