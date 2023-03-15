@@ -1,31 +1,25 @@
 import * as React from 'react'
 import { Switch, Text, View } from 'react-native'
-import DoorIcon from '../../../assets/svg/door_icon.svg'
+import DarkModeIcon from '../../../assets/svg/darkmode_icon.svg'
 import color from '../../styles/color'
 import text from '../../styles/text'
 
 import styles from './styles'
 
-const DoorCard = (): JSX.Element => {
+const DarkModeCard = (): JSX.Element => {
     const [status, setStatus] = React.useState<boolean>(false)
-
     return (
-        <View
-            style={[
-                styles.container,
-                status ? styles.container__green : styles.container__red,
-            ]}
-        >
+        <View style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.iconBackground}>
-                    <DoorIcon />
+                    <DarkModeIcon />
                 </View>
                 <Text style={[text.heavy, text.size_small, text.color_white]}>
-                    {status ? 'KHÓA' : 'MỞ KHÓA'}
+                    CHỦ ĐỀ TỐI
                 </Text>
             </View>
             <Switch
-                trackColor={{ false: color.gray, true: color.gray }}
+                trackColor={{ false: color.gray, true: color.blue }}
                 thumbColor={'white'}
                 value={status}
                 onValueChange={() => setStatus(!status)}
@@ -34,4 +28,4 @@ const DoorCard = (): JSX.Element => {
     )
 }
 
-export default DoorCard
+export default DarkModeCard

@@ -1,16 +1,14 @@
 import { useFonts } from 'expo-font'
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import Button from './src/components/Button/Button'
-import DoorCard from './src/components/DoorCard/DoorCard'
-import EnvironmentStatusCard from './src/components/EnvironmentStatusCard/EnvironmentStatusCard'
-import Input from './src/components/Input/Input'
-import NotifyCard from './src/components/NotifyCard/NotifyCard'
-import text from './src/styles/text'
+import * as React from 'react'
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './src/screens/LoginScreen'
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigator from './src/navigation/TabNavigator'
+const AuthStack = createStackNavigator();
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
-    const [value, setValue] = React.useState<string>('')
     //load font
     const [fontLoaded, error] = useFonts({
         'SF-Pro-Rounded_heavy': require('./assets/font/SF-Pro-Rounded-Heavy.otf'),
@@ -24,26 +22,10 @@ export default function App() {
         return null
     }
     return (
-        <View style={style.main}>
-            <EnvironmentStatusCard temperature={30} humidity={80} />
-            <DoorCard />
-            <NotifyCard type='warning' message='Có người đột nhập' />
-            <Input value={value} onChange={setValue} placeholder={'email'} />
-            <Button extend>
-                <Text style={[text.bold, text.size_medium, text.color_white]}>
-                    Login
-                </Text>
-            </Button>
-        </View>
+    <SafeAreaProvider>
+        <NavigationContainer>
+            <TabNavigator />
+        </NavigationContainer>
+    </SafeAreaProvider>
     )
 }
-
-const style = StyleSheet.create({
-    main: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 20,
-        backgroundColor: '#F6F2DB',
-    },
-})
