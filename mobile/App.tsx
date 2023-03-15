@@ -1,8 +1,11 @@
 import { useFonts } from 'expo-font'
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import DoorCard from './src/components/DoorCard/DoorCard'
-import EnvironmentStatusCard from './src/components/EnvironmentStatusCard/EnvironmentStatusCard'
+import * as React from 'react'
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './src/screens/LoginScreen'
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import TabNavigator from './src/navigation/TabNavigator'
+const AuthStack = createStackNavigator();
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
@@ -19,18 +22,10 @@ export default function App() {
         return null
     }
     return (
-        <View style={style.main}>
-            <EnvironmentStatusCard />
-            <DoorCard />
-        </View>
+    <SafeAreaProvider>
+        <NavigationContainer>
+            <TabNavigator />
+        </NavigationContainer>
+    </SafeAreaProvider>
     )
 }
-
-const style = StyleSheet.create({
-    main: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 20,
-    },
-})
