@@ -1,31 +1,45 @@
+import { useTheme } from '@react-navigation/native'
 import * as React from 'react'
-import {Text, View, Image, Pressable} from 'react-native'
-import Button from '../Button/Button'
-import styles from './styles'
-import text from '../../styles/text'
+import { Image, Pressable, Text, View } from 'react-native'
 import BellIcon from '../../../assets/svg/bell_icon.svg'
-import IconButton from '../IconButton/IconButton'
-import { useNavigation } from '@react-navigation/native';
+import text from '../../styles/text'
+import IconWrapper from '../IconWrapper/IconWrapper'
 import VoiceButton from '../VoiceButton/index'
-const Header = (): JSX.Element => {
-    const navigation = useNavigation();
-    const [isChecked, setIsChecked] = React.useState(false)
+import styles from './styles'
+
+const Header = ({ navigation }: any): JSX.Element => {
+    const themeColor = useTheme()
+
     return (
-        <View>
-          <View style={styles.header}>
-            <Image
-              source={require('../../../assets/imgs/avatar.png')}
-            />
-            <View style={styles.btn}>
-              <VoiceButton />
-              <Pressable onPress={()=>{navigation.navigate('NotifyScreen')}}>
-                <IconButton color='white' Icon={BellIcon} />
-              </Pressable>
-              </View>
-          </View>
-          <Text style={styles.title}>Xin chào, ThoaiLe</Text>
-        </View>     
-      
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <Image
+                    source={require('../../../assets/imgs/avatar.png')}
+                    style={styles.image}
+                />
+                <View style={styles.btn}>
+                    <VoiceButton />
+                    <Pressable
+                        onPress={() => {
+                            navigation.navigate('Notification')
+                        }}
+                    >
+                        <IconWrapper color='white'>
+                            <BellIcon width={25} height={20} />
+                        </IconWrapper>
+                    </Pressable>
+                </View>
+            </View>
+            <Text
+                style={[
+                    styles.title,
+                    text.bold,
+                    { color: themeColor.colors.text },
+                ]}
+            >
+                Xin chào, ThoaiLe
+            </Text>
+        </View>
     )
 }
 

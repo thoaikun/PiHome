@@ -1,11 +1,12 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 import { useFonts } from 'expo-font'
 import * as React from 'react'
-import { createStackNavigator } from '@react-navigation/stack';
-import LoginScreen from './src/screens/LoginScreen'
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 import TabNavigator from './src/navigation/TabNavigator'
-const AuthStack = createStackNavigator();
+import LoginScreen from './src/screens/LoginScreen'
+import { PiHomeDarkTheme, PiHomeLightTheme } from './src/styles/themes'
+const AuthStack = createStackNavigator()
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
@@ -21,11 +22,12 @@ export default function App() {
     if (!fontLoaded) {
         return null
     }
+
     return (
-    <SafeAreaProvider>
-        <NavigationContainer>
-            <TabNavigator />
-        </NavigationContainer>
-    </SafeAreaProvider>
+        <SafeAreaProvider>
+            <NavigationContainer theme={PiHomeLightTheme}>
+                <TabNavigator />
+            </NavigationContainer>
+        </SafeAreaProvider>
     )
 }

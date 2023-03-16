@@ -1,24 +1,22 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import color from '../../styles/color'
-var maxWidth = Dimensions.get('window').width; //full width
-var maxHeight = Dimensions.get('window').height; //full height
+
+var maxWidth = Dimensions.get('window').width //full width
+var maxHeight = Dimensions.get('window').height //full height
+
 const styles = StyleSheet.create({
     container: {
-      width: maxWidth,
-      height: maxHeight,
-      backgroundColor: color.lightBackground,
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: 20
+        width: maxWidth,
+        height: maxHeight,
     },
-    noti: {
-      width: maxWidth,
-      marginTop: 120,
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      gap: 10
-    }
+    notify: {
+        width: maxWidth,
+        marginTop: 110,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 15,
+    },
 })
 
 export default styles
