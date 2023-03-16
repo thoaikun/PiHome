@@ -10,6 +10,13 @@ const EnvironmentStatusCard = (props: {
     temperature: number
     humidity: number
 }): JSX.Element => {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+
     return (
         <View style={styles.container}>
             <View style={styles.dateContainer}>
@@ -17,7 +24,7 @@ const EnvironmentStatusCard = (props: {
                 <Text
                     style={[text.semiBold, text.size_small, text.color_white]}
                 >
-                    16 Nov, 2023
+                    {day} {monthNames[month]}, {year}
                 </Text>
             </View>
             <View style={styles.statusContainer}>
@@ -34,7 +41,7 @@ const EnvironmentStatusCard = (props: {
                         <Text
                             style={[
                                 text.heavy,
-                                text.size_medium,
+                                text.size_small,
                                 text.color_white,
                             ]}
                         >
@@ -64,7 +71,7 @@ const EnvironmentStatusCard = (props: {
                         <Text
                             style={[
                                 text.heavy,
-                                text.size_medium,
+                                text.size_small,
                                 text.color_white,
                             ]}
                         >

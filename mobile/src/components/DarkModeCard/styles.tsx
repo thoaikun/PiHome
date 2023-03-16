@@ -7,17 +7,11 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderRadius: 20,
-
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-    },
-    container__red: {
-        backgroundColor: color.red,
-    },
-    container__green: {
-        backgroundColor: color.green,
+        backgroundColor: color.darkBackground
     },
     content: {
         display: 'flex',

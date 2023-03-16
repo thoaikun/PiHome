@@ -1,9 +1,8 @@
 import * as React from 'react'
-import { Pressable, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import styles from './styles'
 
-const Button = (props: {
-    children: JSX.Element | JSX.Element[]
+const VoiceButton = (props: {
     extend?: boolean | undefined
 }): JSX.Element => {
     const [pressed, setPressed] = React.useState<boolean>(false)
@@ -17,9 +16,9 @@ const Button = (props: {
                 pressed ? styles.onPress : null,
             ]}
         >
-            {props.children}
+           {!pressed ? <Text style={styles.title}>Kiểm tra loa</Text> : <Text style={styles.title}>Dừng kiểm tra</Text>}
         </Pressable>
     )
 }
 
-export default Button
+export default VoiceButton
