@@ -3,6 +3,7 @@ import { Text, View } from 'react-native'
 import CalendarIcon from '../../../assets/svg/calendar_icon.svg'
 import FireIcon from '../../../assets/svg/fire_icon.svg'
 import WaterIcon from '../../../assets/svg/water_icon.svg'
+
 import text from '../../styles/text'
 import styles from './styles'
 
@@ -10,12 +11,24 @@ const EnvironmentStatusCard = (props: {
     temperature: number
     humidity: number
 }): JSX.Element => {
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"];
+    var dateObj = new Date()
+    var month = dateObj.getUTCMonth() + 1 //months from 1-12
+    var day = dateObj.getUTCDate()
+    var year = dateObj.getUTCFullYear()
+    const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ]
 
     return (
         <View style={styles.container}>

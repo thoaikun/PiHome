@@ -1,15 +1,27 @@
 import { useTheme } from '@react-navigation/native'
 import * as React from 'react'
 import { Switch, Text, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import DarkModeIcon from '../../../assets/svg/darkmode_icon.svg'
+import { toggleTheme } from '../../redux/slice/themeSlice'
 import color from '../../styles/color'
 import text from '../../styles/text'
 
 import styles from './styles'
 
+const useChangeTheme = (status: boolean) => {
+    const dispatch = useDispatch()
+
+    React.useEffect(() => {
+        dispatch(toggleTheme())
+    }, [status])
+}
+
 const DarkModeCard = (): JSX.Element => {
     const themeColor = useTheme()
     const [status, setStatus] = React.useState<boolean>(false)
+    useChangeTheme(status)
+
     return (
         <View
             style={[
