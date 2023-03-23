@@ -44,7 +44,7 @@ const HomeScreen = ({ navigation }: any): JSX.Element => {
     return (
         <View style={styles.container}>
             <Header navigation={navigation} />
-            <EnvironmentStatusCard temperature={30} humidity={80} />
+            <EnvironmentStatusCard />
             <DoorCard />
             <FlatList
                 data={data}

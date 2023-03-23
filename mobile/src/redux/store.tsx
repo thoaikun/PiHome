@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import socketSlice from './slice/socketSlice'
+import environmentSlice from './slice/environmentSlice'
 import themeSlice from './slice/themeSlice'
 
 const store = configureStore({
     reducer: {
-        socket: socketSlice.reducer,
+        environment: environmentSlice.reducer,
         theme: themeSlice.reducer,
     },
 })
