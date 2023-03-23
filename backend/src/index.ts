@@ -1,12 +1,11 @@
-import express, { Express } from 'express'
-import { createServer } from 'http'
+// import express, { Express } from 'express'
+// import { createServer } from 'http'
 import { Server } from 'socket.io'
 import DevicesController from './app/controller/devices.controller'
 import DoorController from './app/controller/door.controller'
 import EnvController from './app/controller/env.controller'
 import SpeakerController from './app/controller/speaker.controller'
 
-// import TestController from './app/controller/test.controller'
 import MqttClient from './utils/mqttClient'
 import Subscriber from './utils/subscriber'
 
@@ -15,15 +14,13 @@ const port = 3000
 // const httpServer = createServer(app)
 const io = new Server(3000)
 
-// let testController = new TestController()
-let envController: Subscriber = new EnvController()
-let doorController: Subscriber = new DoorController()
-let speakerController: Subscriber = new SpeakerController()
-let devicesController: Subscriber = new DevicesController()
-
 const mqttClient: MqttClient = new MqttClient()
-// mqttClient.subscribe(testController)
-// mqttClient.subscribeTopic('thoaile/feeds/welcome-feed')
+
+let envController: Subscriber = new EnvController(mqttClient)
+let doorController: Subscriber = new DoorController(mqttClient)
+let speakerController: Subscriber = new SpeakerController(mqttClient)
+let devicesController: Subscriber = new DevicesController(mqttClient)
+
 mqttClient.subscribe(envController, 'env controller')
 mqttClient.subscribeTopic('thoaile/feeds/envstatus')
 mqttClient.subscribe(doorController, 'door controller')
@@ -60,17 +57,9 @@ io.on('connection', (socket) => {
             })
     })
 
-    socket.on('controller', (message: string) => {
-        io.to('client room').emit('to client', message)
-    })
-
-    socket.on('client', (message: string) => {
-        let data = JSON.parse(message)
-        io.to(data.to).emit('to controller', message)
+    socket.on('transmission', (message: string) => {
+        const {from, to, data} = JSON.parse(message)
+        io.to(`${from === 'client' ? to : 'client room'}`).emit(`${from} to ${to}`, data)
+        console.log(`Message from ${from} to ${to}: ${data}`)
     })
 })
-
-// io.on('controller', (message) => {
-//     console.log('main server receive message from controller: ', message)
-//     io.to('client room').emit('to client', message)
-// })
