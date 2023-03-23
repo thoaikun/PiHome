@@ -8,20 +8,15 @@ import color from '../../styles/color'
 import text from '../../styles/text'
 
 import styles from './styles'
-
-const useChangeTheme = (status: boolean) => {
-    const dispatch = useDispatch()
-
-    React.useEffect(() => {
-        dispatch(toggleTheme())
-    }, [status])
-}
-
 const DarkModeCard = (): JSX.Element => {
     const themeColor = useTheme()
     const [status, setStatus] = React.useState<boolean>(false)
-    useChangeTheme(status)
+    const dispatch = useDispatch()
 
+    const handleChangeStatus = () => {
+        setStatus(!status)
+        dispatch(toggleTheme())
+    }
     return (
         <View
             style={[
@@ -47,7 +42,7 @@ const DarkModeCard = (): JSX.Element => {
                 trackColor={{ false: color.gray, true: color.blue }}
                 thumbColor={'white'}
                 value={status}
-                onValueChange={() => setStatus(!status)}
+                onValueChange={handleChangeStatus}
             />
         </View>
     )
