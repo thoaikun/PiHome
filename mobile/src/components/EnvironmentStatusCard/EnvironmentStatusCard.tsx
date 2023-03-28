@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux'
 import CalendarIcon from '../../../assets/svg/calendar_icon.svg'
 import FireIcon from '../../../assets/svg/fire_icon.svg'
 import WaterIcon from '../../../assets/svg/water_icon.svg'
-import { environmentSelector } from '../../redux/selector'
+import { temperatureSelector, humiditySelector } from '../../redux/selector'
 
 import text from '../../styles/text'
 import styles from './styles'
 
 const EnvironmentStatusCard = (): JSX.Element => {
-    const { temperature, humidity } = useSelector(environmentSelector)
+    const { temperature } = useSelector(temperatureSelector)
+    const { humidity } = useSelector(humiditySelector)
 
     var dateObj = new Date()
     var month = dateObj.getUTCMonth() + 1 //months from 1-12
