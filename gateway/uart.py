@@ -1,5 +1,4 @@
 import serial.tools.list_ports
-from create_data import *
 
 
 def getPort():  #Hàm tìm cổng COM
