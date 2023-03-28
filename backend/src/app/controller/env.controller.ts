@@ -1,20 +1,21 @@
 import { io, Socket } from 'socket.io-client'
+import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
 
 class EnvController implements Subscriber {
     private socket: Socket
+    private name: String = 'envController'
 
-    constructor() {
+    constructor(mqttClient: MqttClient) {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {
-            this.socket.emit('join controller room', 'env controller')
+            this.socket.emit('join controller room', this.name)
         })
     }
 
     public update(context: string): void {
-        this.socket.emit('controller', context)
-        let data = JSON.parse(context)
+        this.socket.emit('transmission', context)
         // Updata database
     }
 
