@@ -2,9 +2,9 @@ import { io, Socket } from 'socket.io-client'
 import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
 
-class SpeakerController implements Subscriber {
+class FanController implements Subscriber {
     private socket: Socket
-    private name: String = 'speakerController'
+    private name: String = 'fanController'
 
     constructor(mqttClient: MqttClient) {
         this.socket = io('http://localhost:3000')
@@ -14,7 +14,7 @@ class SpeakerController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage('thoaile/feeds/speakerstatus', JSON.stringify(message))
+            mqttClient.sendMessage('thoaile/feeds/fanstatus', JSON.stringify(message))
         })
     }
 
@@ -28,4 +28,4 @@ class SpeakerController implements Subscriber {
     }
 }
 
-export default SpeakerController
+export default FanController

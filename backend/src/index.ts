@@ -1,13 +1,15 @@
 // import express, { Express } from 'express'
 // import { createServer } from 'http'
 import { Server } from 'socket.io'
-import DevicesController from './app/controller/devices.controller'
+import LightController from './app/controller/light.controller'
 import DoorController from './app/controller/door.controller'
-import EnvController from './app/controller/env.controller'
+import HumidityController from './app/controller/humidity.controller'
 import SpeakerController from './app/controller/speaker.controller'
+import TemperatureController from './app/controller/temperature.controller'
 
 import MqttClient from './utils/mqttClient'
 import Subscriber from './utils/subscriber'
+import FanController from './app/controller/fan.controller'
 
 const port = 3000
 // const app: Express = express()
@@ -16,19 +18,25 @@ const io = new Server(3000)
 
 const mqttClient: MqttClient = new MqttClient()
 
-let envController: Subscriber = new EnvController(mqttClient)
-let doorController: Subscriber = new DoorController(mqttClient)
-let speakerController: Subscriber = new SpeakerController(mqttClient)
-let devicesController: Subscriber = new DevicesController(mqttClient)
+const temperatureController: Subscriber = new TemperatureController(mqttClient)
+const humidityController: Subscriber = new HumidityController(mqttClient)
+const doorController: Subscriber = new DoorController(mqttClient)
+const speakerController: Subscriber = new SpeakerController(mqttClient)
+const lightController: Subscriber = new LightController(mqttClient)
+const fanController: Subscriber = new FanController(mqttClient)
 
-mqttClient.subscribe(envController, 'env controller')
-mqttClient.subscribeTopic('thoaile/feeds/envstatus')
-mqttClient.subscribe(doorController, 'door controller')
+mqttClient.subscribe(temperatureController, 'temperatureController')
+mqttClient.subscribeTopic('thoaile/feeds/temperaturestatus')
+mqttClient.subscribe(humidityController, 'humidityController')
+mqttClient.subscribeTopic('thoaile/feeds/humiditystatus')
+mqttClient.subscribe(doorController, 'doorController')
 mqttClient.subscribeTopic('thoaile/feeds/doorstatus')
-mqttClient.subscribe(speakerController, 'speaker controller')
+mqttClient.subscribe(speakerController, 'speakerController')
 mqttClient.subscribeTopic('thoaile/feeds/speakerstatus')
-mqttClient.subscribe(devicesController, 'devices controller')
-mqttClient.subscribeTopic('thoaile/feeds/devicesstatus')
+mqttClient.subscribe(lightController, 'lightController')
+mqttClient.subscribeTopic('thoaile/feeds/lightstatus')
+mqttClient.subscribe(fanController, 'fanController')
+mqttClient.subscribeTopic('thoaile/feeds/fanstatus')
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }))
@@ -57,9 +65,9 @@ io.on('connection', (socket) => {
             })
     })
 
-    socket.on('transmission', (message: string) => {
-        const {from, to, data} = JSON.parse(message)
-        io.to(`${from === 'client' ? to : 'client room'}`).emit(`${from} to ${to}`, data)
-        console.log(`Message from ${from} to ${to}: ${data}`)
+    socket.on('transmission', (message) => {
+        const {from, to, data} = message
+        io.to(`${from === 'client' ? to : 'client room'}`).emit(`${from} to ${to}`, message)
+        console.log(`Message from ${from} to ${to}: ${JSON.stringify(data)}`)
     })
 })

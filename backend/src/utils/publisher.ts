@@ -1,7 +1,7 @@
 import Subscriber from './subscriber'
 
 class Publisher {
-    private subscribers: {[field: string]: Subscriber}
+    private subscribers: { [field: string]: Subscriber }
 
     constructor() {
         this.subscribers = {}
@@ -17,8 +17,10 @@ class Publisher {
     }
 
     public notify(context: string) {
-        const {from} = JSON.parse(context)
-        this.subscribers[from].update(context)
+        const data = JSON.parse(context)
+        if (data.to === 'client') {
+            this.subscribers[data.from].update(data)
+        }
     }
 }
 

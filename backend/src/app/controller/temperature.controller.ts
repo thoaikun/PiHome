@@ -2,9 +2,9 @@ import { io, Socket } from 'socket.io-client'
 import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
 
-class EnvController implements Subscriber {
+class TemperatureController implements Subscriber {
     private socket: Socket
-    private name: String = 'envController'
+    private name: String = 'temperatureController'
 
     constructor(mqttClient: MqttClient) {
         this.socket = io('http://localhost:3000')
@@ -14,7 +14,7 @@ class EnvController implements Subscriber {
         })
     }
 
-    public update(context: string): void {
+    public update(context): void {
         this.socket.emit('transmission', context)
         // Updata database
     }
@@ -24,4 +24,4 @@ class EnvController implements Subscriber {
     }
 }
 
-export default EnvController
+export default TemperatureController

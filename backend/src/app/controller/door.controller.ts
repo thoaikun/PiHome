@@ -14,16 +14,11 @@ class DoorController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message: string) => {
-            const data = {
-                from: this.name,
-                to: 'client',
-                data: JSON.parse(message)
-            }
-            mqttClient.sendMessage('thoaile/feeds/doorstatus', data.toString())
+            mqttClient.sendMessage('thoaile/feeds/doorstatus', JSON.stringify(message))
         })
     }
 
-    public update(context: string): void {
+    public update(context): void {
         this.socket.emit('transmission', context)
         // Updata database
     }
