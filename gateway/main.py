@@ -31,7 +31,7 @@ def message(client, feed_io, payload):
         if data['data']['command'] == "off":
             writeData("T")
         else:
-            writeData("S")      
+            writeData("S")
     if feed_io == "pihome-fan":
         if payload == "0":
             writeData("0")
