@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export type Humidity = {
-   humidity: number
+    humidity: number
 }
 
 const initValue: Humidity = {

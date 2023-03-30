@@ -1,10 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Socket } from 'socket.io-client'
-import { updateTemperature } from '../redux/slice/temperatureSlice'
-import { updateHumidity } from '../redux/slice/humiditySlice'
 import { updateDoor } from '../redux/slice/doorSlice'
+import { updateHumidity } from '../redux/slice/humiditySlice'
 import { updateSpeaker } from '../redux/slice/speakerSlice'
+import { updateTemperature } from '../redux/slice/temperatureSlice'
 
 const useSocket = (socket: Socket) => {
     const dispatch = useDispatch()
@@ -47,13 +47,12 @@ const useSocket = (socket: Socket) => {
 
         return () => {
             socket.off('connect', onConnect)
-            socket.off('to client', onTemperatureUpdate)
-            socket.off('to client', onTemperatureUpdate)
-            socket.off('to client', onHumidityUpdate)
-            socket.off('to client', onDoorUpdate)
-            socket.off('to client', onSpeakerUpdate)
-            socket.off('to client', onLightUpdate)
-            socket.off('to client', onFanUpdate)
+            socket.off('temperatureController to client', onTemperatureUpdate)
+            socket.off('humidityController to client', onHumidityUpdate)
+            socket.off('doorController to client', onDoorUpdate)
+            socket.off('speakerController to client', onSpeakerUpdate)
+            socket.off('lightController to client', onLightUpdate)
+            socket.off('fanController to client', onFanUpdate)
         }
     }, [socket])
 }

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         lineHeight: 18,
         color: color.lightText,
-        padding: 5
+        padding: 5,
     },
 })
 

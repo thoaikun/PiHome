@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export type Fan = {
-  status: number
+    status: number
 }
 
 const initValue: Fan = {
-    status: 0
+    status: 0,
 }
 
 const fanSlice = createSlice({

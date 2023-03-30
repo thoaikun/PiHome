@@ -1,7 +1,7 @@
 import Subscriber from './subscriber'
 
 class Publisher {
-    private subscribers: {[field: string]: Subscriber}
+    private subscribers: { [field: string]: Subscriber }
 
     constructor() {
         this.subscribers = {}

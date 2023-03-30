@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export type Light = {
-  status: string
+    status: string
 }
 
 const initValue: Light = {
-    status: 'off'
+    status: 'off',
 }
 
 const lightSlice = createSlice({

@@ -27,7 +27,9 @@
     "react-native-svg": "13.4.0",
     "react-redux": "^8.0.5",
     "serialize-javascript": "^6.0.1",
-    "socket.io-client": "^4.6.1"
+    "socket.io-client": "^4.6.1",
+    "expo-notifications": "~0.18.1",
+    "expo-device": "~5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

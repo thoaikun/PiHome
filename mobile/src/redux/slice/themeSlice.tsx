@@ -6,7 +6,9 @@ const themeSlice = createSlice({
     initialState: PiHomeLightTheme,
     reducers: {
         toggleTheme: (state) => {
-            return JSON.stringify(state) === JSON.stringify(PiHomeLightTheme) ? PiHomeDarkTheme: PiHomeLightTheme;
+            return JSON.stringify(state) === JSON.stringify(PiHomeLightTheme)
+                ? PiHomeDarkTheme
+                : PiHomeLightTheme
         },
     },
 })

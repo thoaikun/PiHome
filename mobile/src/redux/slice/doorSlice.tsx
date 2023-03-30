@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export type Door = {
-  status: string
+    status: string
 }
 
 const initValue: Door = {
-    status: 'unlock'
+    status: 'unlock',
 }
 
 const doorSlice = createSlice({

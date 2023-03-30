@@ -2,9 +2,7 @@ import * as React from 'react'
 import { Pressable, Text, View } from 'react-native'
 import styles from './styles'
 
-const VoiceButton = (props: {
-    extend?: boolean | undefined
-}): JSX.Element => {
+const VoiceButton = (props: { extend?: boolean | undefined }): JSX.Element => {
     const [pressed, setPressed] = React.useState<boolean>(false)
 
     return (
@@ -16,7 +14,11 @@ const VoiceButton = (props: {
                 pressed ? styles.onPress : null,
             ]}
         >
-           {!pressed ? <Text style={styles.title}>Kiểm tra loa</Text> : <Text style={styles.title}>Dừng kiểm tra</Text>}
+            {!pressed ? (
+                <Text style={styles.title}>Kiểm tra loa</Text>
+            ) : (
+                <Text style={styles.title}>Dừng kiểm tra</Text>
+            )}
         </Pressable>
     )
 }

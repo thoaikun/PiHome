@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
         lineHeight: 18,
-        color: color.lightText
+        color: color.lightText,
     },
 })
 

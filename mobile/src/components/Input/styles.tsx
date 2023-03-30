@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 20,
         backgroundColor: 'white',
     },
-    input: {     
+    input: {
         paddingBottom: 10,
         paddingHorizontal: 15,
         backgroundColor: 'white',

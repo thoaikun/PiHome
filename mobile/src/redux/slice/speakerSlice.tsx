@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export type Speaker = {
-  status: string
+    status: string
 }
 
 const initValue: Speaker = {
-    status: 'off'
+    status: 'off',
 }
 
 const speakerSlice = createSlice({
