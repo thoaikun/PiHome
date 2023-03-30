@@ -3,7 +3,8 @@ import Publisher from './publisher'
 
 class MqttClient extends Publisher {
     private ADAFRUIT_IO_USERNAME: string = 'thoaile'
-    private ADAFRUIT_IO_KEY: string = 'aio_monr4997Xd3vhe6pOTZj61UVXPfL'
+    private ADAFRUIT_IO_KEY: string = 'aio_ZaPd22PS9OrDaORjjSk39InLpUBN'
+    private ADAFRUIT_IO_FEEDS: string = this.ADAFRUIT_IO_USERNAME + '/feeds/'
     private client: mqtt.MqttClient
 
     constructor() {
@@ -25,7 +26,7 @@ class MqttClient extends Publisher {
     }
 
     public subscribeTopic(topic: string): void {
-        this.client.subscribe(topic, (err) => {
+        this.client.subscribe(this.ADAFRUIT_IO_FEEDS + topic, (err) => {
             if (err) console.log(err)
         })
     }

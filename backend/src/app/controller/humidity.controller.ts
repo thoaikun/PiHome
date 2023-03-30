@@ -1,12 +1,11 @@
 import { io, Socket } from 'socket.io-client'
-import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
 
 class HumidityController implements Subscriber {
     private socket: Socket
     private name: String = 'humidityController'
 
-    constructor(mqttClient: MqttClient) {
+    constructor() {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {

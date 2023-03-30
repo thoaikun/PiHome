@@ -6,10 +6,10 @@ import DoorController from './app/controller/door.controller'
 import HumidityController from './app/controller/humidity.controller'
 import SpeakerController from './app/controller/speaker.controller'
 import TemperatureController from './app/controller/temperature.controller'
+import FanController from './app/controller/fan.controller'
 
 import MqttClient from './utils/mqttClient'
 import Subscriber from './utils/subscriber'
-import FanController from './app/controller/fan.controller'
 
 const port = 3000
 // const app: Express = express()
@@ -18,25 +18,25 @@ const io = new Server(3000)
 
 const mqttClient: MqttClient = new MqttClient()
 
-const temperatureController: Subscriber = new TemperatureController(mqttClient)
-const humidityController: Subscriber = new HumidityController(mqttClient)
+const temperatureController: Subscriber = new TemperatureController()
+const humidityController: Subscriber = new HumidityController()
 const doorController: Subscriber = new DoorController(mqttClient)
 const speakerController: Subscriber = new SpeakerController(mqttClient)
 const lightController: Subscriber = new LightController(mqttClient)
 const fanController: Subscriber = new FanController(mqttClient)
 
 mqttClient.subscribe(temperatureController, 'temperatureController')
-mqttClient.subscribeTopic('thoaile/feeds/temperaturestatus')
+mqttClient.subscribeTopic('pihome-temperature')
 mqttClient.subscribe(humidityController, 'humidityController')
-mqttClient.subscribeTopic('thoaile/feeds/humiditystatus')
+mqttClient.subscribeTopic('pihome-humidity')
 mqttClient.subscribe(doorController, 'doorController')
-mqttClient.subscribeTopic('thoaile/feeds/doorstatus')
+mqttClient.subscribeTopic('pihome-door')
 mqttClient.subscribe(speakerController, 'speakerController')
-mqttClient.subscribeTopic('thoaile/feeds/speakerstatus')
+mqttClient.subscribeTopic('pihome-speaker')
 mqttClient.subscribe(lightController, 'lightController')
-mqttClient.subscribeTopic('thoaile/feeds/lightstatus')
+mqttClient.subscribeTopic('pihome-light')
 mqttClient.subscribe(fanController, 'fanController')
-mqttClient.subscribeTopic('thoaile/feeds/fanstatus')
+mqttClient.subscribeTopic('pihome-fan')
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }))
