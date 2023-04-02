@@ -1,6 +1,7 @@
 import { io, Socket } from 'socket.io-client'
 import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
+import { LightModel } from '../model/device.model'
 
 class LightController implements Subscriber {
     private socket: Socket
@@ -14,7 +15,10 @@ class LightController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage('thoaile/feeds/lightstatus', JSON.stringify(message))
+            mqttClient.sendMessage(
+                'thoaile/feeds/lightstatus',
+                JSON.stringify(message)
+            )
         })
     }
 

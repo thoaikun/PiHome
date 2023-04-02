@@ -1,12 +1,13 @@
 // import express, { Express } from 'express'
 // import { createServer } from 'http'
 import { Server } from 'socket.io'
-import LightController from './app/controller/light.controller'
 import DoorController from './app/controller/door.controller'
+import FanController from './app/controller/fan.controller'
 import HumidityController from './app/controller/humidity.controller'
+import LightController from './app/controller/light.controller'
 import SpeakerController from './app/controller/speaker.controller'
 import TemperatureController from './app/controller/temperature.controller'
-import FanController from './app/controller/fan.controller'
+import db from './config/database'
 
 import MqttClient from './utils/mqttClient'
 import Subscriber from './utils/subscriber'
@@ -15,6 +16,7 @@ const port = 3000
 // const app: Express = express()
 // const httpServer = createServer(app)
 const io = new Server(3000)
+db.connect()
 
 const mqttClient: MqttClient = new MqttClient()
 
@@ -66,8 +68,11 @@ io.on('connection', (socket) => {
     })
 
     socket.on('transmission', (message) => {
-        const {from, to, data} = message
-        io.to(`${from === 'client' ? to : 'client room'}`).emit(`${from} to ${to}`, message)
+        const { from, to, data } = message
+        io.to(`${from === 'client' ? to : 'client room'}`).emit(
+            `${from} to ${to}`,
+            message
+        )
         console.log(`Message from ${from} to ${to}: ${JSON.stringify(data)}`)
     })
 })

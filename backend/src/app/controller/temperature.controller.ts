@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
+import { TemperatureModel } from '../model/device.model'
 
 class TemperatureController implements Subscriber {
     private socket: Socket
@@ -16,6 +17,10 @@ class TemperatureController implements Subscriber {
     public update(context): void {
         this.socket.emit('transmission', context)
         // Updata database
+        let data = new TemperatureModel({
+            value: 34,
+        })
+        data.save().then(() => console.log('updated'))
     }
 
     public getSocket(): Socket {
