@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import * as Device from 'expo-device'
 import * as Notifications from 'expo-notifications'
 import * as React from 'react'
@@ -27,6 +28,7 @@ const useNotifications = () => {
     const responseListener = React.useRef<Notifications.Subscription>(
         defaultNotificationListener
     )
+    const navigation = useNavigation()
 
     React.useEffect(() => {
         registerForPushNotificationsAsync().then((token) => {
@@ -41,7 +43,9 @@ const useNotifications = () => {
         responseListener.current =
             Notifications.addNotificationResponseReceivedListener(
                 (response) => {
-                    console.log(response)
+                    let screen =
+                        response.notification.request.content.data.screen
+                    navigation.navigate(screen)
                 }
             )
 
@@ -63,7 +67,7 @@ const schedulePushNotification = async (title: string, body: string) => {
         content: {
             title: title,
             body: body,
-            data: { data: 'goes here' },
+            data: { screen: 'Notification' },
         },
         trigger: null,
     })
@@ -94,7 +98,6 @@ const registerForPushNotificationsAsync = async () => {
             return
         }
         token = (await Notifications.getExpoPushTokenAsync()).data
-        console.log(token)
     } else {
         alert('Must use physical device for Push Notifications')
     }
