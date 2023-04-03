@@ -6,7 +6,7 @@ class DoorController implements Subscriber {
     private socket: Socket
     private name: String = 'doorController'
 
-    constructor(mqttClient: MqttClient) {
+    constructor(mqttClient: MqttClient, feed: String) {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {
@@ -14,7 +14,7 @@ class DoorController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message: string) => {
-            mqttClient.sendMessage('thoaile/feeds/doorstatus', JSON.stringify(message))
+            mqttClient.sendMessage('thoaile/feeds/' + feed, JSON.stringify(message))
         })
     }
 

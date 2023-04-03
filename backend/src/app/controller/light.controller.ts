@@ -7,7 +7,7 @@ class LightController implements Subscriber {
     private socket: Socket
     private name: String = 'lightController'
 
-    constructor(mqttClient: MqttClient) {
+    constructor(mqttClient: MqttClient, feed: String) {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {
@@ -15,10 +15,7 @@ class LightController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage(
-                'thoaile/feeds/lightstatus',
-                JSON.stringify(message)
-            )
+            mqttClient.sendMessage('thoaile/feeds/' + feed, JSON.stringify(message))
         })
     }
 

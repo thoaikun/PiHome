@@ -6,7 +6,7 @@ class SpeakerController implements Subscriber {
     private socket: Socket
     private name: String = 'speakerController'
 
-    constructor(mqttClient: MqttClient) {
+    constructor(mqttClient: MqttClient, feed: String) {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {
@@ -14,7 +14,7 @@ class SpeakerController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage('thoaile/feeds/speakerstatus', JSON.stringify(message))
+            mqttClient.sendMessage('thoaile/feeds/' + feed, JSON.stringify(message))
         })
     }
 
