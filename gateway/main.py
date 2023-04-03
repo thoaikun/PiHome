@@ -1,9 +1,9 @@
 import sys
 from Adafruit_IO import MQTTClient
-from uart import *
+# from uart import *
 import time
 import json
-# import random
+import random
 # from create_data import *
 
 AIO_FEED_IO = ["pihome-light", "pihome-fan"]
@@ -25,25 +25,24 @@ def disconnected (client) :
 
 def message(client, feed_io, payload):
     print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
-    data = json.loads(payload)
-    print(data)
+    payload = json.loads(payload)
     if feed_io == "pihome-light":
-        if data['data']['command'] == "off":
+        if payload['data']['command'] == "off":
             writeData("T")
         else:
             writeData("S")
     if feed_io == "pihome-fan":
-        if payload == "0":
+        if payload['data']['command'] == "0":
             writeData("0")
-        elif payload == "20":
+        elif payload['data']['command'] == "20":
             writeData("1")
-        elif payload == "40":
+        elif payload['data']['command'] == "40":
             writeData("2")
-        elif payload == "60":
+        elif payload['data']['command'] == "60":
             writeData("3")
-        elif payload == "80":
+        elif payload['data']['command'] == "80":
             writeData("4")
-        elif payload == "100":
+        elif payload['dat']['command'] == "100":
             writeData("5")
 
 #Taọ đối tượng MQTT Client
@@ -56,10 +55,10 @@ client.connect()
 client.loop_background()
 
 while True:
-    # value_temp = random.randint(20, 50)
-    # value_humi = random.randint(0, 100)
-    # client.publish("pihome-temperature", value_temp)
-    # client.publish("pihome-humidity", value_humi)
-    readSerial(client)
+    value_temp = random.randint(20, 50)
+    value_humi = random.randint(0, 100)
+    client.publish("pihome-temperature", value_temp)
+    client.publish("pihome-humidity", value_humi)
+    # readSerial(client)
     time.sleep(2)
     pass

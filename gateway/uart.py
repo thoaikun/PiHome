@@ -1,4 +1,5 @@
 import serial.tools.list_ports
+import json
 
 
 def getPort():  #Hàm tìm cổng COM
@@ -35,7 +36,14 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
             }
             client.publish("pihome-temperature", json.dumps(data))
         elif splitData[0] == "HUMI":
-            client.publish("pihome-humidity", create_humidity_data(splitData[1]))
+            data = {
+                'from': 'humidityController',
+                'to': 'client',
+                'data':{
+                    'humidity': splitData[1]
+                }
+            }
+            client.publish("pihome-humidity", json.dumps(data))
         elif splitData[0] == "LUX":
             client.publish("pihome-lux", splitData[1])
     except:
