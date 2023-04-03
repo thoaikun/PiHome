@@ -1,26 +1,26 @@
 import { io, Socket } from 'socket.io-client'
-import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
+import { TemperatureModel } from '../model/device.model'
 
-class SpeakerController implements Subscriber {
+class TemperatureController implements Subscriber {
     private socket: Socket
-    private name: String = 'speakerController'
+    private name: String = 'temperatureController'
 
-    constructor(mqttClient: MqttClient) {
+    constructor() {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {
             this.socket.emit('join controller room', this.name)
-        })
-
-        this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage('thoaile/feeds/speakerstatus', JSON.stringify(message))
         })
     }
 
     public update(context): void {
         this.socket.emit('transmission', context)
         // Updata database
+        let data = new TemperatureModel({
+            value: 34,
+        })
+        data.save().then(() => console.log('updated'))
     }
 
     public getSocket(): Socket {
@@ -28,4 +28,4 @@ class SpeakerController implements Subscriber {
     }
 }
 
-export default SpeakerController
+export default TemperatureController
