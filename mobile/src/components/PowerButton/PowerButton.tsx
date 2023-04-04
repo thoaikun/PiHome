@@ -1,10 +1,10 @@
 import * as React from 'react'
-import Fan from './Fan'
-import Light from './Light'
+import Fan, { FanProps } from './Fan'
+import Light, { LightProps } from './Light'
 
 type PowerButtonCmp = React.FunctionComponent & {
-    Light: React.FunctionComponent
-    Fan: React.FunctionComponent
+    Light: React.FunctionComponent<LightProps>
+    Fan: React.FunctionComponent<FanProps>
 }
 
 const PowerButton: PowerButtonCmp = ({ children }: any): JSX.Element => (

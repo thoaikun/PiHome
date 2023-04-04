@@ -9,18 +9,27 @@ import ProgressBar from '../ProgessBar/ProgressBar'
 
 import styles from './styles'
 
-const Fan = (): JSX.Element => {
+export type FanProps = {
+    setSpeed: (value: number) => void
+    speed: number
+    status: boolean
+    setStatus: (value: boolean) => void
+}
+
+const Fan = (props: FanProps): JSX.Element => {
     const themeColor = useTheme()
-    const [status, setStatus] = React.useState<boolean>(false)
-    const [speed, setSpeed] = React.useState<number>(0)
 
     return (
         <View>
-            <Pressable onPress={() => setStatus(!status)}>
+            <Pressable
+                onPress={() => {
+                    props.setStatus(!props.status)
+                }}
+            >
                 <View
                     style={[
                         styles.buttonControl,
-                        status
+                        !props.status
                             ? styles.button__active
                             : styles.button__inactive,
                     ]}
@@ -50,7 +59,7 @@ const Fan = (): JSX.Element => {
                     Tốc độ quạt
                 </Text>
             </View>
-            <ProgressBar speed={speed} setSpeed={setSpeed} />
+            <ProgressBar speed={props.speed} setSpeed={props.setSpeed} />
         </View>
     )
 }

@@ -13,27 +13,27 @@ const useSocket = (socket: Socket) => {
     }
     const onTemperatureUpdate = (message: string) => {
         dispatch(updateTemperature(message))
-        console.log(message)
+        // console.log(message)
     }
     const onHumidityUpdate = (message: string) => {
         dispatch(updateHumidity(message))
-        console.log(message)
+        // console.log(message)
     }
     const onDoorUpdate = (message: string) => {
         dispatch(updateDoor(message))
-        console.log(message)
+        // console.log(message)
     }
     const onSpeakerUpdate = (message: string) => {
         dispatch(updateSpeaker(message))
-        console.log(message)
+        // console.log(message)
     }
     const onLightUpdate = (message: string) => {
         dispatch(updateTemperature(JSON.parse(message)))
-        console.log(message)
+        // console.log(message)
     }
     const onFanUpdate = (message: string) => {
         dispatch(updateTemperature(JSON.parse(message)))
-        console.log(message)
+        // console.log(message)
     }
 
     React.useEffect(() => {

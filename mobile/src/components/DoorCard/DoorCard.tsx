@@ -9,7 +9,7 @@ import styles from './styles'
 
 const DoorCard = (): JSX.Element => {
     const [status, setStatus] = React.useState<boolean>(false)
-    const { schedulePushNotification } = useNotifications()
+    // const { schedulePushNotification } = useNotifications()
 
     return (
         <View
@@ -32,12 +32,12 @@ const DoorCard = (): JSX.Element => {
                 value={status}
                 onValueChange={async () => {
                     setStatus(!status)
-                    await schedulePushNotification(
-                        'Successful',
-                        status
-                            ? 'Door has been locked'
-                            : 'Door has been unlocked'
-                    )
+                    // await schedulePushNotification(
+                    //     'Successful',
+                    //     status
+                    //         ? 'Door has been locked'
+                    //         : 'Door has been unlocked'
+                    // )
                 }}
             />
         </View>

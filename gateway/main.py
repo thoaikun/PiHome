@@ -4,7 +4,7 @@ from Adafruit_IO import MQTTClient
 import time
 import json
 import random
-# from create_data import *
+from create_data import *
 
 AIO_FEED_IO = ["pihome-light", "pihome-fan"]
 AIO_USERNAME = "tuyetvy_nguyen"
@@ -24,26 +24,33 @@ def disconnected (client) :
     sys.exit(1)
 
 def message(client, feed_io, payload):
-    print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
+    # print(payload)
+    # print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
     payload = json.loads(payload)
     if feed_io == "pihome-light":
-        if payload['data']['command'] == "off":
+        if payload['command'] == "off":
             writeData("T")
         else:
             writeData("S")
     if feed_io == "pihome-fan":
-        if payload['data']['command'] == "0":
-            writeData("0")
-        elif payload['data']['command'] == "20":
-            writeData("1")
-        elif payload['data']['command'] == "40":
-            writeData("2")
-        elif payload['data']['command'] == "60":
-            writeData("3")
-        elif payload['data']['command'] == "80":
-            writeData("4")
-        elif payload['dat']['command'] == "100":
-            writeData("5")
+        if payload['command'] == "0":
+            print('Lạnh vãi bùi, tắt quạt nè')
+            # writeData("0")
+        elif payload['command'] == "20":
+            print('Bật quạt chill chill cái coi')
+            # writeData("1")
+        elif payload['command'] == "40":
+            print('Vẫn nóng, tăng thêm cái nè')
+            # writeData("2")
+        elif payload['command'] == "60":
+            pass
+            # writeData("3")
+        elif payload['command'] == "80":
+            pass
+            # writeData("4")
+        elif payload['command'] == "100":
+            pass
+            # writeData("5")
 
 #Taọ đối tượng MQTT Client
 client = MQTTClient(AIO_USERNAME, AIO_KEY)
@@ -55,10 +62,10 @@ client.connect()
 client.loop_background()
 
 while True:
-    value_temp = random.randint(20, 50)
-    value_humi = random.randint(0, 100)
-    client.publish("pihome-temperature", value_temp)
-    client.publish("pihome-humidity", value_humi)
+    # value_temp = random.randint(20, 50)
+    # value_humi = random.randint(0, 100)
+    # client.publish("pihome-temperature", create_temperature_obj(value_temp))
+    # client.publish("pihome-humidity", create_humidity_obj(value_humi))
     # readSerial(client)
-    time.sleep(2)
+    time.sleep(10)
     pass

@@ -8,22 +8,26 @@ import text from '../../styles/text'
 
 import styles from './styles'
 
-const Light = (): JSX.Element => {
+export type LightProps = {
+    setStatus: (value: boolean) => void
+    status: boolean
+}
+
+const Light = (props: LightProps): JSX.Element => {
     const themeColor = useTheme()
-    const [status, setStatus] = React.useState<boolean>(false)
 
     return (
         <View>
-            <Pressable onPress={() => setStatus(!status)}>
+            <Pressable onPress={() => props.setStatus(!props.status)}>
                 <View
                     style={[
                         styles.buttonControl,
-                        status
+                        props.status
                             ? styles.button__inactive
                             : styles.button__active,
                     ]}
                 >
-                    {!status ? (
+                    {!props.status ? (
                         <PowerIcon width={60} height={60} />
                     ) : (
                         <PowerIconActive width={60} height={60} />
@@ -45,10 +49,12 @@ const Light = (): JSX.Element => {
                     style={[
                         text.bold,
                         text.size_big,
-                        status ? styles.text__active : styles.text__inactive,
+                        props.status
+                            ? styles.text__active
+                            : styles.text__inactive,
                     ]}
                 >
-                    {status ? 'BẬT' : 'TẮT'}
+                    {props.status ? 'BẬT' : 'TẮT'}
                 </Text>
             </View>
         </View>

@@ -8,7 +8,7 @@ import socket from './utils/socket'
 
 const Main = (): JSX.Element => {
     const theme = useSelector(themeSelector)
-    // useSocket(socket)
+    useSocket(socket)
 
     return (
         <NavigationContainer theme={theme}>
