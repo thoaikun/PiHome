@@ -1,12 +1,13 @@
 import { io, Socket } from 'socket.io-client'
 import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
+import { ADAFRUIT_IO_FEEDS } from '../../config/adafruit'
 
 class SpeakerController implements Subscriber {
     private socket: Socket
     private name: String = 'speakerController'
 
-    constructor(mqttClient: MqttClient, feed: String) {
+    constructor(mqttClient: MqttClient, topic: string) {
         this.socket = io('http://localhost:3000')
 
         this.socket.on('connect', () => {
@@ -14,7 +15,7 @@ class SpeakerController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage('thoaile/feeds/' + feed, JSON.stringify(message))
+            mqttClient.sendMessage(ADAFRUIT_IO_FEEDS + topic, JSON.stringify(message))
         })
     }
 
