@@ -28,13 +28,14 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
     try:
         if splitData[0] == "TEMP":
             data = {
-                'from': 'tempController',
+                'from': 'temperatureController',
                 'to': 'client',
                 'data':{
                     'temperature': splitData[1]
                 }
             }
             client.publish("pihome-temperature", json.dumps(data))
+
         elif splitData[0] == "HUMI":
             data = {
                 'from': 'humidityController',
@@ -44,6 +45,7 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
                 }
             }
             client.publish("pihome-humidity", json.dumps(data))
+
         elif splitData[0] == "LUX":
             client.publish("pihome-lux", splitData[1])
     except:
