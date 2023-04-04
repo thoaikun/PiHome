@@ -1,11 +1,13 @@
 import { useFonts } from 'expo-font'
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import DoorCard from './src/components/DoorCard/DoorCard'
-import EnvironmentStatusCard from './src/components/EnvironmentStatusCard/EnvironmentStatusCard'
+import * as React from 'react'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { Provider } from 'react-redux'
+import Main from './src/Main'
+import store from './src/redux/store'
 
 export default function App() {
     const [visible, setVisible] = React.useState(true)
+
     //load font
     const [fontLoaded, error] = useFonts({
         'SF-Pro-Rounded_heavy': require('./assets/font/SF-Pro-Rounded-Heavy.otf'),
@@ -18,19 +20,12 @@ export default function App() {
     if (!fontLoaded) {
         return null
     }
+
     return (
-        <View style={style.main}>
-            <EnvironmentStatusCard />
-            <DoorCard />
-        </View>
+        <SafeAreaProvider>
+            <Provider store={store}>
+                <Main />
+            </Provider>
+        </SafeAreaProvider>
     )
 }
-
-const style = StyleSheet.create({
-    main: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 20,
-    },
-})
