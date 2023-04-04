@@ -44,6 +44,7 @@ def message(client, feed_io, payload):
         #     writeData("4")
         # elif payload == 100:
         #     writeData("5")
+
         if payload['status'] == 'off':
             writeData("0")
         else:

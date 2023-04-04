@@ -46,6 +46,16 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
             }
             client.publish("pihome-humidity", json.dumps(data))
 
+        elif splitData[0] == "WARNING":
+            data = {
+                'from': 'notificationController',
+                'to': 'server',
+                'data':{
+                    'content': splitData[1]
+                }
+            }
+            client.publish("pihome-warning", json.dumps(data))
+
         elif splitData[0] == "LUX":
             client.publish("pihome-lux", splitData[1])
     except:
