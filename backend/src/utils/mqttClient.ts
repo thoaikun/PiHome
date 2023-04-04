@@ -1,10 +1,8 @@
 import * as mqtt from 'mqtt'
 import Publisher from './publisher'
+import { ADAFRUIT_IO_FEEDS, ADAFRUIT_IO_KEY, ADAFRUIT_IO_USERNAME } from '../config/adafruit'
 
 class MqttClient extends Publisher {
-    private ADAFRUIT_IO_USERNAME: string = 'thoaile'
-    private ADAFRUIT_IO_KEY: string = 'aio_ZaPd22PS9OrDaORjjSk39InLpUBN'
-    private ADAFRUIT_IO_FEEDS: string = this.ADAFRUIT_IO_USERNAME + '/feeds/'
     private client: mqtt.MqttClient
 
     constructor() {
@@ -13,8 +11,8 @@ class MqttClient extends Publisher {
             host: 'io.adafruit.com',
             port: '8883',
             protocol: 'mqtts',
-            username: this.ADAFRUIT_IO_USERNAME,
-            password: this.ADAFRUIT_IO_KEY,
+            username: ADAFRUIT_IO_USERNAME,
+            password: ADAFRUIT_IO_KEY,
         }
 
         this.client = mqtt.connect(option)
@@ -26,7 +24,7 @@ class MqttClient extends Publisher {
     }
 
     public subscribeTopic(topic: string): void {
-        this.client.subscribe(this.ADAFRUIT_IO_FEEDS + topic, (err) => {
+        this.client.subscribe(ADAFRUIT_IO_FEEDS + topic, (err) => {
             if (err) console.log(err)
         })
     }
