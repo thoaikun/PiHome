@@ -1,12 +1,37 @@
 import * as React from 'react'
 import { Text, View } from 'react-native'
+import { useSelector } from 'react-redux'
 import CalendarIcon from '../../../assets/svg/calendar_icon.svg'
 import FireIcon from '../../../assets/svg/fire_icon.svg'
 import WaterIcon from '../../../assets/svg/water_icon.svg'
+import { temperatureSelector, humiditySelector } from '../../redux/selector'
+
 import text from '../../styles/text'
 import styles from './styles'
 
 const EnvironmentStatusCard = (): JSX.Element => {
+    const { temperature } = useSelector(temperatureSelector)
+    const { humidity } = useSelector(humiditySelector)
+
+    var dateObj = new Date()
+    var month = dateObj.getUTCMonth() + 1 //months from 1-12
+    var day = dateObj.getUTCDate()
+    var year = dateObj.getUTCFullYear()
+    const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ]
+
     return (
         <View style={styles.container}>
             <View style={styles.dateContainer}>
@@ -14,7 +39,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                 <Text
                     style={[text.semiBold, text.size_small, text.color_white]}
                 >
-                    16 Nov, 2023
+                    {day} {monthNames[month]}, {year}
                 </Text>
             </View>
             <View style={styles.statusContainer}>
@@ -31,11 +56,11 @@ const EnvironmentStatusCard = (): JSX.Element => {
                         <Text
                             style={[
                                 text.heavy,
-                                text.size_medium,
+                                text.size_small,
                                 text.color_white,
                             ]}
                         >
-                            23 C
+                            {temperature ? temperature : ''} &deg;C
                         </Text>
                         <Text
                             style={[
@@ -44,7 +69,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                                 text.color_white,
                             ]}
                         >
-                            Temperature
+                            Nhiệt độ
                         </Text>
                     </View>
                 </View>
@@ -61,11 +86,11 @@ const EnvironmentStatusCard = (): JSX.Element => {
                         <Text
                             style={[
                                 text.heavy,
-                                text.size_medium,
+                                text.size_small,
                                 text.color_white,
                             ]}
                         >
-                            30 %
+                            {humidity ? humidity : ''} %
                         </Text>
                         <Text
                             style={[
@@ -74,7 +99,7 @@ const EnvironmentStatusCard = (): JSX.Element => {
                                 text.color_white,
                             ]}
                         >
-                            Humidity
+                            Độ ẩm
                         </Text>
                     </View>
                 </View>

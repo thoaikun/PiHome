@@ -4,7 +4,7 @@ from uart import *
 import time
 import json
 import random
-# from create_data import *
+from create_data import *
 
 AIO_FEED_IO = ["pihome-light", "pihome-fan"]
 AIO_USERNAME = "tuyetvy_nguyen"
@@ -24,7 +24,8 @@ def disconnected (client) :
     sys.exit(1)
 
 def message(client, feed_io, payload):
-    print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
+    # print(payload)
+    # print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
     payload = json.loads(payload)
     if feed_io == "pihome-light":
         if payload['command'] == "off":
