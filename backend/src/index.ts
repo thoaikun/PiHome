@@ -11,6 +11,8 @@ import db from './config/database'
 
 import MqttClient from './utils/mqttClient'
 import Subscriber from './utils/subscriber'
+import WarningController from './app/controller/warning.controller'
+import AlertController from './app/controller/alert.controller'
 
 const port = 3000
 // const app: Express = express()
@@ -19,8 +21,8 @@ const io = new Server(3000)
 db.connect()
 
 const mqttClient: MqttClient = new MqttClient()
-const [temperatureFeed, humidityFeed, doorFeed, speakerFeed, lightFeed, fanFeed]
-    = ['pihome-temperature', 'pihome-humidity', 'pihome-door', 'pihome-speaker', 'pihome-light', 'pihome-fan']
+const [temperatureFeed, humidityFeed, doorFeed, speakerFeed, lightFeed, fanFeed, warningFeed, alertFeed]
+    = ['pihome-temperature', 'pihome-humidity', 'pihome-door', 'pihome-speaker', 'pihome-light', 'pihome-fan', 'pihome-warning', 'pihome-alert']
 
 const temperatureController: Subscriber = new TemperatureController()
 const humidityController: Subscriber = new HumidityController()
@@ -28,6 +30,8 @@ const doorController: Subscriber = new DoorController(mqttClient, doorFeed)
 const speakerController: Subscriber = new SpeakerController(mqttClient, speakerFeed)
 const lightController: Subscriber = new LightController(mqttClient, lightFeed)
 const fanController: Subscriber = new FanController(mqttClient, fanFeed)
+const warnningController: Subscriber = new WarningController()
+const alertController: Subscriber = new AlertController()
 
 mqttClient.subscribe(temperatureController, 'temperatureController')
 mqttClient.subscribeTopic(temperatureFeed)
@@ -41,6 +45,10 @@ mqttClient.subscribe(lightController, 'lightController')
 mqttClient.subscribeTopic(lightFeed)
 mqttClient.subscribe(fanController, 'fanController')
 mqttClient.subscribeTopic(fanFeed)
+mqttClient.subscribe(warnningController, 'warningController')
+mqttClient.subscribeTopic(warningFeed)
+mqttClient.subscribe(alertController, 'alertController')
+mqttClient.subscribeTopic(alertFeed)
 
 // app.use(express.json())
 // app.use(express.urlencoded({ extended: false }))
