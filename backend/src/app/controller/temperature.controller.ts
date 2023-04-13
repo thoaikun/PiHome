@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
-import { TemperatureModel } from '../model/device.model'
+import { DeviceModel, TemperatureModel } from '../model/device.model'
 
 class TemperatureController implements Subscriber {
     private socket: Socket
@@ -16,11 +16,15 @@ class TemperatureController implements Subscriber {
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        // let model = new TemperatureModel({
-        //     value: context.data.temperature,
-        // })
-        // model.save().then(() => console.log('updated'))
-        // TemperatureModel.countDocuments().then(data => console.log(data))
+
+        DeviceModel.deleteMany({ type: "Temperature" }).then(() => {
+            let model = new TemperatureModel({
+                value: context.data.temperature,
+            })
+            model.save().then(() => console.log('database is updated')) // Success
+        }).catch(function (error) {
+            console.log(error); // Failure
+        });
     }
 
     public getSocket(): Socket {

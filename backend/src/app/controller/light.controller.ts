@@ -1,7 +1,7 @@
 import { io, Socket } from 'socket.io-client'
 import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
-import { LightModel } from '../model/device.model'
+import { DeviceModel, LightModel } from '../model/device.model'
 import { ADAFRUIT_IO_FEEDS } from '../../config/adafruit'
 
 class LightController implements Subscriber {
@@ -16,13 +16,21 @@ class LightController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message) => {
-            mqttClient.sendMessage(ADAFRUIT_IO_FEEDS + topic, JSON.stringify(message))
+            mqttClient.sendMessage(ADAFRUIT_IO_FEEDS + topic, message)
         })
     }
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        // Updata database
+        
+        DeviceModel.deleteMany({ type: "Light" }).then(() => {
+            let model = new LightModel({
+                status: context.data.status,
+            })
+            model.save().then(() => console.log('database is updated')) // Success
+        }).catch(function (error) {
+            console.log(error); // Failure
+        });
     }
 
     public getSocket(): Socket {

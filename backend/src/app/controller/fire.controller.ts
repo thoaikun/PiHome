@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
+import { FireModel, NotificationModel } from '../model/notification.model'
 
 class FireController implements Subscriber {
     private socket: Socket
@@ -15,7 +16,15 @@ class FireController implements Subscriber {
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        // Updata database
+        
+        NotificationModel.deleteMany({ type: "Fire" }).then(() => {
+            let model = new FireModel({
+                status: context.data.status,
+            })
+            model.save().then(() => console.log('database is updated')) // Success
+        }).catch(function (error) {
+            console.log(error); // Failure
+        });
     }
 
     public getSocket(): Socket {

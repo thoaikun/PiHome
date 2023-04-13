@@ -2,6 +2,7 @@ import { io, Socket } from 'socket.io-client'
 import MqttClient from '../../utils/mqttClient'
 import Subscriber from '../../utils/subscriber'
 import { ADAFRUIT_IO_FEEDS } from '../../config/adafruit'
+import { DeviceModel, DoorModel } from '../model/device.model'
 
 class DoorController implements Subscriber {
     private socket: Socket
@@ -15,13 +16,21 @@ class DoorController implements Subscriber {
         })
 
         this.socket.on(`client to ${this.name}`, (message: string) => {
-            mqttClient.sendMessage(ADAFRUIT_IO_FEEDS + topic, JSON.stringify(message))
+            mqttClient.sendMessage(ADAFRUIT_IO_FEEDS + topic, message)
         })
     }
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        // Updata database
+        
+        DeviceModel.deleteMany({ type: "Door" }).then(() => {
+            let model = new DoorModel({
+                status: context.data.status,
+            })
+            model.save().then(() => console.log('database is updated')) // Success
+        }).catch(function (error) {
+            console.log(error); // Failure
+        });
     }
 
     public getSocket(): Socket {

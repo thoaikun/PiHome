@@ -1,16 +1,65 @@
 import { model, Schema } from 'mongoose'
 
+const options = { discriminatorKey: 'type' }
+
 interface Notification {
-    time: Date
-    type: string
-    message: string
+    updateTime: Date
 }
 
-const notificationSchema = new Schema<Notification>({
-    time: { type: Date, default: Date.now() },
-    type: { type: String, required: true },
-    message: { type: String, required: true },
-})
+interface Earthquake {
+    status: boolean
+}
+
+interface Fire {
+    status: boolean
+}
+
+interface Thief {
+    status: boolean
+}
+
+const notificationSchema = new Schema<Notification>(
+    {
+        updateTime: { type: Date, default: Date.now() },
+    },
+    options
+)
 
 const NotificationModel = model('Notification', notificationSchema)
-export default NotificationModel
+
+const EarthquakeModel = NotificationModel.discriminator(
+    'Earthquake',
+    new Schema<Earthquake>(
+        {
+            status: { type: Boolean, required: true },
+        },
+        options
+    )
+)
+
+const FireModel = NotificationModel.discriminator(
+    'Fire',
+    new Schema<Fire>(
+        {
+            status: { type: Boolean, required: true },
+        },
+        options
+    )
+)
+
+const ThiefModel = NotificationModel.discriminator(
+    'Thief',
+    new Schema<Thief>(
+        {
+            status: { type: Boolean, required: true },
+        },
+        options
+    )
+)
+
+export {
+    NotificationModel,
+    EarthquakeModel,
+    FireModel,
+    ThiefModel
+}

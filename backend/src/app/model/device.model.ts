@@ -100,6 +100,7 @@ const FanModel = DeviceModel.discriminator(
 )
 
 export {
+    DeviceModel,
     LightModel,
     DoorModel,
     SpeakerModel,
