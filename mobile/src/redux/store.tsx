@@ -6,6 +6,7 @@ import doorSlice from './slice/doorSlice'
 import speakerSlice from './slice/speakerSlice'
 import lightSlice from './slice/lightSlice'
 import fanSlice from './slice/fanSlice'
+import loginSlice from './slice/loginSlice'
 
 const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
         light: lightSlice.reducer,
         fan: fanSlice.reducer,
         speaker: speakerSlice.reducer,
+        login: loginSlice.reducer,
     },
 })
 

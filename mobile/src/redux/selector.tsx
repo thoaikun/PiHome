@@ -13,3 +13,6 @@ export const doorSelector = (state: RootState) => state.door
 export const lightSelector = (state: RootState) => state.light
 
 export const fanSelector = (state: RootState) => state.fan
+
+export const loginSelector = (state: RootState) => state.login
+
