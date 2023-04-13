@@ -46,15 +46,35 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
             }
             client.publish("pihome-humidity", json.dumps(data))
 
-        # elif splitData[0] == "WARNING":
-        #     data = {
-        #         'from': 'notificationController',
-        #         'to': 'server',
-        #         'data':{
-        #             'content': splitData[1]
-        #         }
-        #     }
-        #     client.publish("pihome-warning", json.dumps(data))
+        elif splitData[0] == "THIEF":
+            data = {
+                'from': 'thiefController',
+                'to': 'server',
+                'data':{
+                    'status': splitData[1]
+                }
+            }
+            client.publish("pihome-thief", json.dumps(data))
+
+        elif splitData[0] == "FIRE":
+            data = {
+                'from': 'fireController',
+                'to': 'server',
+                'data':{
+                    'status': splitData[1]
+                }
+            }
+            client.publish("pihome-fire", json.dumps(data))
+
+        elif splitData[0] == 'EARTHQUAKE':
+            data = {
+                'from': 'earthquakeController',
+                'to': 'server',
+                'data':{
+                    'status': splitData[1]
+                }
+            }
+            client.publish("pihome-earthquake", json.dumps(data))
 
         elif splitData[0] == "LUX":
             client.publish("pihome-lux", splitData[1])
