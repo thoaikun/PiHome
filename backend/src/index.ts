@@ -3,13 +3,13 @@ import db from './config/database'
 import MqttClient from './utils/mqttClient'
 
 import DoorController from './app/controller/door.controller'
+import EarthquakeController from './app/controller/earthquake.controller'
 import FanController from './app/controller/fan.controller'
+import FireController from './app/controller/fire.controller'
 import HumidityController from './app/controller/humidity.controller'
 import LightController from './app/controller/light.controller'
 import SpeakerController from './app/controller/speaker.controller'
 import TemperatureController from './app/controller/temperature.controller'
-import EarthquakeController from './app/controller/earthquake.controller'
-import FireController from './app/controller/fire.controller'
 import ThiefController from './app/controller/thief.controller'
 
 import Subscriber from './utils/subscriber'
@@ -18,14 +18,35 @@ const io = new Server(3000)
 db.connect()
 
 const mqttClient: MqttClient = new MqttClient()
-const [temperature, humidity, door, speaker, light, fan, earthquake, fire, thief]
-    = ['temperature', 'humidity', 'door', 'speaker', 'light', 'fan', 'earthquake', 'fire', 'thief']
-        .map((item) => ({ feed: `pihome-${item}`, name: `${item}Controller` }))
+const [
+    temperature,
+    humidity,
+    door,
+    speaker,
+    light,
+    fan,
+    earthquake,
+    fire,
+    thief,
+] = [
+    'temperature',
+    'humidity',
+    'door',
+    'speaker',
+    'light',
+    'fan',
+    'earthquake',
+    'fire',
+    'thief',
+].map((item) => ({ feed: `pihome-${item}`, name: `${item}Controller` }))
 
 const temperatureController: Subscriber = new TemperatureController()
 const humidityController: Subscriber = new HumidityController()
 const doorController: Subscriber = new DoorController(mqttClient, door.feed)
-const speakerController: Subscriber = new SpeakerController(mqttClient, speaker.feed)
+const speakerController: Subscriber = new SpeakerController(
+    mqttClient,
+    speaker.feed
+)
 const lightController: Subscriber = new LightController(mqttClient, light.feed)
 const fanController: Subscriber = new FanController(mqttClient, fan.feed)
 const earthquakeController: Subscriber = new EarthquakeController()
@@ -72,8 +93,8 @@ io.on('connection', (socket) => {
         const { from, to, data } = message
         io.to(`${from === 'client' ? to : 'client room'}`).emit(
             `${from} to ${to}`,
-            data
+            JSON.stringify(data)
         )
-        console.log(`Message from ${from} to ${to}: ${JSON.stringify(data)}`)
+        // console.log(`Message from ${from} to ${to}: ${JSON.stringify(data)}`)
     })
 })

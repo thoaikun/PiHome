@@ -28,7 +28,7 @@ const useNotifications = () => {
     const responseListener = React.useRef<Notifications.Subscription>(
         defaultNotificationListener
     )
-    const navigation = useNavigation()
+    // const navigation = useNavigation()
 
     React.useEffect(() => {
         registerForPushNotificationsAsync().then((token) => {
@@ -43,9 +43,9 @@ const useNotifications = () => {
         responseListener.current =
             Notifications.addNotificationResponseReceivedListener(
                 (response) => {
-                    let screen =
-                        response.notification.request.content.data.screen
-                    navigation.navigate(screen)
+                    // let screen =
+                    //     response.notification.request.content.data.screen
+                    // navigation.navigate(screen)
                 }
             )
 
