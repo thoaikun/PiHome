@@ -17,6 +17,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 15,
     },
+    text: {
+        fontSize: 20,
+        color: color.darkBackground,
+    },
 })
 
 export default styles

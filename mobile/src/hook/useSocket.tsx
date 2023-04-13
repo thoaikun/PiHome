@@ -2,12 +2,14 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { Socket } from 'socket.io-client'
 import { updateDoor } from '../redux/slice/doorSlice'
-import { updateEarthquakeNotification } from '../redux/slice/earthquakeSlice'
-import { updateFireNotification } from '../redux/slice/fireSlice'
 import { updateHumidity } from '../redux/slice/humiditySlice'
+import {
+    updateEarthquakeStatus,
+    updateFireStatus,
+    updateThiefStatus,
+} from '../redux/slice/notificationSlice'
 import { updateSpeaker } from '../redux/slice/speakerSlice'
 import { updateTemperature } from '../redux/slice/temperatureSlice'
-import { updateThiefNotification } from '../redux/slice/thiefSlice'
 
 const useSocket = (socket: Socket) => {
     const dispatch = useDispatch()
@@ -16,38 +18,30 @@ const useSocket = (socket: Socket) => {
     }
     const onTemperatureUpdate = (message: string) => {
         dispatch(updateTemperature(JSON.parse(message)))
-        // console.log(message)
     }
     const onHumidityUpdate = (message: string) => {
         dispatch(updateHumidity(JSON.parse(message)))
-        // console.log(message)
     }
     const onDoorUpdate = (message: string) => {
         dispatch(updateDoor(message))
-        // console.log(message)
     }
     const onSpeakerUpdate = (message: string) => {
         dispatch(updateSpeaker(message))
-        // console.log(message)
     }
     const onLightUpdate = (message: string) => {
         dispatch(updateTemperature(JSON.parse(message)))
-        // console.log(message)
     }
     const onFanUpdate = (message: string) => {
         dispatch(updateTemperature(JSON.parse(message)))
-        // console.log(message)
     }
     const onThiefUpdate = (message: string) => {
-        dispatch(updateThiefNotification(JSON.parse(message)))
-        // console.log(JSON.parse(message))
+        dispatch(updateThiefStatus(JSON.parse(message)))
     }
     const onFireUpdate = (message: string) => {
-        dispatch(updateFireNotification(JSON.parse(message)))
+        dispatch(updateFireStatus(JSON.parse(message)))
     }
     const onEarthquake = (message: string) => {
-        dispatch(updateEarthquakeNotification(JSON.parse(message)))
-        console.log(JSON.parse(message))
+        dispatch(updateEarthquakeStatus(JSON.parse(message)))
     }
 
     React.useEffect(() => {

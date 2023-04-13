@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         color: color.yellow,
     },
     header__alert: {
-        color: color.red,
+        color: color.yellow,
     },
     button: {
         color: color.red,

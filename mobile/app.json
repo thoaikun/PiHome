@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "mobile",
-        "slug": "mobile",
+        "name": "pihome",
+        "slug": "pihome",
         "scheme": "pihome",
         "version": "1.0.0",
         "orientation": "portrait",

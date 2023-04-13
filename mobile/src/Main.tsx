@@ -10,48 +10,58 @@ import {
     themeSelector,
     thiefSelector,
 } from './redux/selector'
-import { updateEarthquakeNotification } from './redux/slice/earthquakeSlice'
-import { updateFireNotification } from './redux/slice/fireSlice'
-import { updateThiefNotification } from './redux/slice/thiefSlice'
+import {
+    NotifyElement,
+    addNotify,
+    updateEarthquakeStatus,
+    updateFireStatus,
+    updateThiefStatus,
+} from './redux/slice/notificationSlice'
 import socket from './utils/socket'
 
 const Main = (): JSX.Element => {
     const theme = useSelector(themeSelector)
     useSocket(socket)
-    const { schedulePushNotification } = useNotifications()
+    // const { schedulePushNotification } = useNotifications()
     const dispatch = useDispatch()
 
-    const { status: thiefStatus } = useSelector(thiefSelector)
-    const { status: fireStatus } = useSelector(fireSelector)
-    const { status: earthquakeStatus } = useSelector(earthquakeSelector)
+    const thiefStatus = useSelector(thiefSelector)
+    const fireStatus = useSelector(fireSelector)
+    const earthquakeStatus = useSelector(earthquakeSelector)
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
-            await schedulePushNotification(title, message)
+            // await schedulePushNotification(title, message)
+            dispatch(addNotify({ title, message }))
         }
+
         if (thiefStatus) {
-            sendNotify('Warning', 'Someone try to break your home')
-            dispatch(updateThiefNotification({ status: false }))
+            sendNotify('Warning', 'Có kẻ đột nhập')
+            dispatch(updateThiefStatus({ status: false }))
         }
     }, [thiefStatus])
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
-            await schedulePushNotification(title, message)
+            // await schedulePushNotification(title, message)
+            dispatch(addNotify({ title, message }))
         }
+
         if (fireStatus) {
-            sendNotify('Alert', 'Fireeeee !!!!')
-            dispatch(updateFireNotification({ status: false }))
+            sendNotify('Alert', 'Có cháy !!!')
+            dispatch(updateFireStatus({ status: false }))
         }
     }, [fireStatus])
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
-            await schedulePushNotification(title, message)
+            // await schedulePushNotification(title, message)
+            dispatch(addNotify({ title, message }))
         }
+
         if (earthquakeStatus) {
-            sendNotify('Alert', 'Earthquakeeeee !!!!')
-            dispatch(updateEarthquakeNotification({ status: false }))
+            sendNotify('Alert', 'Có động đất !!!!')
+            dispatch(updateEarthquakeStatus({ status: false }))
         }
     }, [earthquakeStatus])
 

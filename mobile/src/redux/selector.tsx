@@ -14,8 +14,11 @@ export const lightSelector = (state: RootState) => state.light
 
 export const fanSelector = (state: RootState) => state.fan
 
-export const thiefSelector = (state: RootState) => state.thief
+export const thiefSelector = (state: RootState) => state.notification.thief
 
-export const fireSelector = (state: RootState) => state.fire
+export const fireSelector = (state: RootState) => state.notification.fire
 
-export const earthquakeSelector = (state: RootState) => state.earthquake
+export const earthquakeSelector = (state: RootState) =>
+    state.notification.earthquake
+
+export const notifyListSelector = (state: RootState) => state.notification.list
