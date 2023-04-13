@@ -1,5 +1,6 @@
 import serial.tools.list_ports
 import json
+import time
 
 
 def getPort():  #Hàm tìm cổng COM
@@ -46,38 +47,42 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
             }
             client.publish("pihome-humidity", json.dumps(data))
 
+        elif splitData[0] == "LUX":
+            client.publish("pihome-lux", splitData[1])
+
         elif splitData[0] == "THIEF":
             data = {
                 'from': 'thiefController',
-                'to': 'server',
+                'to': 'client',
                 'data':{
-                    'status': splitData[1]
+                    'status': True if splitData[1] == 'True' else False
                 }
             }
             client.publish("pihome-thief", json.dumps(data))
+            time.sleep(10)
 
         elif splitData[0] == "FIRE":
             data = {
                 'from': 'fireController',
-                'to': 'server',
+                'to': 'client',
                 'data':{
-                    'status': splitData[1]
+                    'status': True if splitData[1] == 'True' else False
                 }
             }
             client.publish("pihome-fire", json.dumps(data))
+            time.sleep(5)
 
         elif splitData[0] == 'EARTHQUAKE':
             data = {
                 'from': 'earthquakeController',
-                'to': 'server',
+                'to': 'client',
                 'data':{
-                    'status': splitData[1]
+                    'status': True if splitData[1] == 'True' else False
                 }
             }
             client.publish("pihome-earthquake", json.dumps(data))
+            time.sleep(10)
 
-        elif splitData[0] == "LUX":
-            client.publish("pihome-lux", splitData[1])
     except:
         pass
 

@@ -4,7 +4,6 @@ from uart import *
 import time
 import json
 import random
-from create_data import *
 
 AIO_FEED_IO = ["pihome-light", "pihome-fan"]
 AIO_USERNAME = "tuyetvy_nguyen"
@@ -27,11 +26,19 @@ def message(client, feed_io, payload):
     # print(payload)
     # print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
     payload = json.loads(payload)
+    print(type(payload))
     if feed_io == "pihome-light":
         if payload['command'] == "off":
             writeData("T")
         else:
             writeData("S")
+
+    if feed_io == "pihome-door":
+        if payload['command'] == "off":
+            writeData("C")
+        else:
+            writeData("O")
+
     if feed_io == "pihome-fan":
         # if payload == 0:
         #     writeData("0")
@@ -51,7 +58,7 @@ def message(client, feed_io, payload):
         else:
             if payload['command'] == 0:
                 writeData("0")
-            elif payload['command'] == 1 :
+            elif payload['command'] == 1:
                 writeData("1")
             elif payload['command'] == 2:
                 writeData("2")
