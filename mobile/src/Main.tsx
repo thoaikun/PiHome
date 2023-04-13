@@ -3,6 +3,10 @@ import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import useNotifications from './hook/useNotification'
 import useSocket from './hook/useSocket'
+import {
+    default as AuthNaviagor,
+    default as AuthNaviagor,
+} from './navigation/AuthNavigator'
 import TabNavigator from './navigation/TabNavigator'
 import {
     earthquakeSelector,
@@ -65,9 +69,11 @@ const Main = (): JSX.Element => {
         }
     }, [earthquakeStatus])
 
+    const login = useSelector(loginSelector)
+    //useSocket(socket)
     return (
         <NavigationContainer theme={theme}>
-            <TabNavigator />
+            {login.isLogin ? <TabNavigator /> : <AuthNaviagor />}
         </NavigationContainer>
     )
 }

@@ -22,3 +22,5 @@ export const earthquakeSelector = (state: RootState) =>
     state.notification.earthquake
 
 export const notifyListSelector = (state: RootState) => state.notification.list
+
+export const loginSelector = (state: RootState) => state.login

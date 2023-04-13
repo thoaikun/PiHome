@@ -11,6 +11,7 @@ import LivingRoomScreen from '../screens/LivingRoomScreen'
 import NotifyScreen from '../screens/NotifyScreen'
 import SettingScreen from '../screens/SettingScreen'
 import { AppTabParamList, HomeStackParamList } from '../utils/navigator'
+import LoginScreen from '../screens/LoginScreen'
 
 const Tab = createBottomTabNavigator<AppTabParamList>()
 const HomeStack = createNativeStackNavigator<HomeStackParamList>()
@@ -37,6 +38,13 @@ const HomeStackCmp = ({
             <HomeStack.Screen
                 name='LivingRoom'
                 component={LivingRoomScreen}
+                options={{
+                    headerShown: false,
+                }}
+            />
+            <HomeStack.Screen
+                name='Login'
+                component={LoginScreen}
                 options={{
                     headerShown: false,
                 }}
