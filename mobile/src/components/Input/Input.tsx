@@ -22,12 +22,7 @@ const Input = (props: {
                     else setTyping(true)
                 }}
                 focusable={props.focus}
-                style={[
-                    styles.input,
-                    !typing ? styles.mt : null,
-                    text.regular,
-                    text.size_medium,
-                ]}
+                style={[styles.input, text.medium, text.size_medium]}
             />
         </View>
     )

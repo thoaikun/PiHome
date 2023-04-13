@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import NotifyCard from '../../components/NotifyCard/NotifyCard'
 import Title from '../../components/Title/Title'
@@ -14,7 +14,7 @@ const NotifyScreen = (): JSX.Element => {
     return (
         <View style={styles.container}>
             <Title name='Thông báo' />
-            <View style={styles.notify}>
+            <ScrollView contentContainerStyle={styles.notify}>
                 {list.length > 0 &&
                     list.map((element: NotifyElement, i: number) => (
                         <NotifyCard
@@ -29,7 +29,7 @@ const NotifyScreen = (): JSX.Element => {
                         Không có thông báo mới
                     </Text>
                 )}
-            </View>
+            </ScrollView>
         </View>
     )
 }

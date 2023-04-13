@@ -3,19 +3,16 @@ import * as React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import useNotifications from './hook/useNotification'
 import useSocket from './hook/useSocket'
-import {
-    default as AuthNaviagor,
-    default as AuthNaviagor,
-} from './navigation/AuthNavigator'
+import AuthNavigator from './navigation/AuthNavigator'
 import TabNavigator from './navigation/TabNavigator'
 import {
     earthquakeSelector,
     fireSelector,
+    loginSelector,
     themeSelector,
     thiefSelector,
 } from './redux/selector'
 import {
-    NotifyElement,
     addNotify,
     updateEarthquakeStatus,
     updateFireStatus,
@@ -32,6 +29,7 @@ const Main = (): JSX.Element => {
     const thiefStatus = useSelector(thiefSelector)
     const fireStatus = useSelector(fireSelector)
     const earthquakeStatus = useSelector(earthquakeSelector)
+    const login = useSelector(loginSelector)
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
@@ -69,11 +67,9 @@ const Main = (): JSX.Element => {
         }
     }, [earthquakeStatus])
 
-    const login = useSelector(loginSelector)
-    //useSocket(socket)
     return (
         <NavigationContainer theme={theme}>
-            {login.isLogin ? <TabNavigator /> : <AuthNaviagor />}
+            {login.isLogin ? <TabNavigator /> : <AuthNavigator />}
         </NavigationContainer>
     )
 }
