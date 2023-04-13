@@ -1,9 +1,9 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
 
-class AlertController implements Subscriber {
+class ThiefController implements Subscriber {
     private socket: Socket
-    private name: String = 'alertController'
+    private name: String = 'thiefController'
 
     constructor() {
         this.socket = io('http://localhost:3000')
@@ -23,4 +23,4 @@ class AlertController implements Subscriber {
     }
 }
 
-export default AlertController
+export default ThiefController

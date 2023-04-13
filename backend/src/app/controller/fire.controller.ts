@@ -1,9 +1,9 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
 
-class WarningController implements Subscriber {
+class FireController implements Subscriber {
     private socket: Socket
-    private name: String = 'warningController'
+    private name: String = 'fireController'
 
     constructor() {
         this.socket = io('http://localhost:3000')
@@ -23,4 +23,4 @@ class WarningController implements Subscriber {
     }
 }
 
-export default WarningController
+export default FireController
