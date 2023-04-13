@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
+import { NotificationModel, ThiefModel } from '../model/notification.model'
 
 class ThiefController implements Subscriber {
     private socket: Socket
@@ -15,7 +16,15 @@ class ThiefController implements Subscriber {
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        // Updata database
+
+        NotificationModel.deleteMany({ type: "Thief" }).then(() => {
+            let model = new ThiefModel({
+                status: context.data.status,
+            })
+            model.save().then(() => console.log('database is updated')) // Success
+        }).catch(function (error) {
+            console.log(error); // Failure
+        });
     }
 
     public getSocket(): Socket {

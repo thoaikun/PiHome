@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
         const { from, to, data } = message
         io.to(`${from === 'client' ? to : 'client room'}`).emit(
             `${from} to ${to}`,
-            data
+            JSON.stringify(data)
         )
         console.log(`Message from ${from} to ${to}: ${JSON.stringify(data)}`)
     })

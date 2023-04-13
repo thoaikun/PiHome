@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import Subscriber from '../../utils/subscriber'
+import { DeviceModel, HumidityModel } from '../model/device.model'
 
 class HumidityController implements Subscriber {
     private socket: Socket
@@ -15,7 +16,15 @@ class HumidityController implements Subscriber {
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        // Updata database
+        
+        DeviceModel.deleteMany({ type: "Humidity" }).then(() => {
+            let model = new HumidityModel({
+                value: context.data.humidity,
+            })
+            model.save().then(() => console.log('database is updated')) // Success
+        }).catch(function (error) {
+            console.log(error); // Failure
+        });
     }
 
     public getSocket(): Socket {
