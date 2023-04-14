@@ -59,7 +59,7 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
                 }
             }
             client.publish("pihome-thief", json.dumps(data))
-            time.sleep(10)
+            time.sleep(5)
 
         elif splitData[0] == "FIRE":
             data = {
@@ -81,7 +81,18 @@ def processData(client, data) :           #Hàm phân tách dữ liệu
                 }
             }
             client.publish("pihome-earthquake", json.dumps(data))
-            time.sleep(10)
+            time.sleep(5)
+
+
+        elif splitData[0] == 'DOOR':
+            data = {
+                'from': 'doorController',
+                'to': 'client',
+                'data':{
+                    'status': True if splitData[1] == 'True' else False
+                }
+            }
+            client.publish("pihome-door", json.dumps(data))
 
     except:
         pass

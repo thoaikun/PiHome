@@ -5,7 +5,7 @@ import time
 import json
 import random
 
-AIO_FEED_IO = ["pihome-light", "pihome-fan"]
+AIO_FEED_IO = ["pihome-light", "pihome-fan", "pihome-door"]
 AIO_USERNAME = "tuyetvy_nguyen"
 AIO_KEY = "aio_Bnrt28M3hNVkRFqy4aiyLx69jw1s"
 
@@ -23,10 +23,9 @@ def disconnected (client) :
     sys.exit(1)
 
 def message(client, feed_io, payload):
-    # print(payload)
-    # print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
+    print("Nhan du lieu: " + payload + " , feed io:" + feed_io)
     payload = json.loads(payload)
-    print(type(payload))
+    print(payload)
     if feed_io == "pihome-light":
         if payload['command'] == "off":
             writeData("T")
@@ -34,25 +33,13 @@ def message(client, feed_io, payload):
             writeData("S")
 
     if feed_io == "pihome-door":
-        if payload['command'] == "off":
-            writeData("C")
-        else:
-            writeData("O")
+        if 'command' in payload:
+            if payload['command'] == "off":
+                writeData("C")
+            else:
+                writeData("O")
 
     if feed_io == "pihome-fan":
-        # if payload == 0:
-        #     writeData("0")
-        # elif payload == 20:
-        #     writeData("1")
-        # elif payload == 40:
-        #     writeData("2")
-        # elif payload == 60:
-        #     writeData("3")
-        # elif payload == 80:
-        #     writeData("4")
-        # elif payload == 100:
-        #     writeData("5")
-
         if payload['status'] == 'off':
             writeData("0")
         else:
@@ -79,11 +66,6 @@ client.connect()
 client.loop_background()
 
 while True:
-    # value_temp = random.randint(20, 50)
-    # value_humi = random.randint(0, 100)
-    # client.publish("pihome-temperature", value_temp)
-    # client.publish("pihome-humidity", value_humi)
-
     readSerial(client)
     time.sleep(10)
     pass
