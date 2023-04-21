@@ -2,6 +2,7 @@ import { Server } from 'socket.io'
 import db from './config/database'
 import MqttClient from './utils/mqttClient'
 
+import AuthController from './app/controller/auth.controller'
 import DoorController from './app/controller/door.controller'
 import FanController from './app/controller/fan.controller'
 import HumidityController from './app/controller/humidity.controller'
@@ -22,6 +23,7 @@ const [temperature, humidity, door, speaker, light, fan, earthquake, fire, thief
     = ['temperature', 'humidity', 'door', 'speaker', 'light', 'fan', 'earthquake', 'fire', 'thief']
         .map((item) => ({ feed: `pihome-${item}`, name: `${item}Controller` }))
 
+const authController: Subscriber = new AuthController()
 const temperatureController: Subscriber = new TemperatureController()
 const humidityController: Subscriber = new HumidityController()
 const doorController: Subscriber = new DoorController(mqttClient, door.feed)
