@@ -1,6 +1,6 @@
 # PiHome
 
-PiHome is a smart home project that utilizes Raspberry Pi as the core of the system. It offers a variety of features, such as home automation, security, and energy management.
+PiHome is a smart home project that offers various features for home automation, security, and energy management.
 
 <p align="center" style="padding: 20px">
   <img src="./logo.png" alt="PiHome">
