@@ -57,9 +57,4 @@ const ThiefModel = NotificationModel.discriminator(
     )
 )
 
-export {
-    NotificationModel,
-    EarthquakeModel,
-    FireModel,
-    ThiefModel
-}
+export { NotificationModel, EarthquakeModel, FireModel, ThiefModel }

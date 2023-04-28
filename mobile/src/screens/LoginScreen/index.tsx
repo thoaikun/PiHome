@@ -1,11 +1,8 @@
 import { useTheme } from '@react-navigation/native'
 import * as React from 'react'
-import { Image, Pressable, Text, View } from 'react-native'
-import Button from '../../components/Button/Button'
+import { Image, View } from 'react-native'
 import Input from '../../components/Input/Input'
 import LoginButton from '../../components/LoginButton/index'
-import color from '../../styles/color'
-import text from '../../styles/text'
 import styles from './styles'
 const LoginScreen = (): JSX.Element => {
     const [email, setEmail] = React.useState<string>('')

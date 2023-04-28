@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 15,
         paddingBottom: 80,
+        paddingTop: 10,
     },
     text: {
         fontSize: 20,

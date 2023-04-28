@@ -5,17 +5,43 @@ import useNotifications from '../../hook/useNotification'
 import color from '../../styles/color'
 import text from '../../styles/text'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { doorSelector } from '../../redux/selector'
+import { updateDoor } from '../../redux/slice/doorSlice'
+import socket from '../../utils/socket'
 import styles from './styles'
 
 const DoorCard = (): JSX.Element => {
-    const [status, setStatus] = React.useState<boolean>(false)
-    // const { schedulePushNotification } = useNotifications()
+    const { isUnlock } = useSelector(doorSelector)
+    const dispatch = useDispatch()
+
+    const handleUnlockDoor = () => {
+        let data = {
+            from: 'client',
+            to: 'doorController',
+            data: {
+                command: 'on',
+            },
+        }
+        socket.emit('transmission', data)
+    }
+
+    const handleLockDoor = () => {
+        let data = {
+            from: 'client',
+            to: 'doorController',
+            data: {
+                command: 'off',
+            },
+        }
+        socket.emit('transmission', data)
+    }
 
     return (
         <View
             style={[
                 styles.container,
-                status ? styles.container__green : styles.container__red,
+                !isUnlock ? styles.container__green : styles.container__red,
             ]}
         >
             <View style={styles.content}>
@@ -23,21 +49,17 @@ const DoorCard = (): JSX.Element => {
                     <DoorIcon />
                 </View>
                 <Text style={[text.heavy, text.size_small, text.color_white]}>
-                    {status ? 'KHÓA' : 'MỞ KHÓA'}
+                    {!isUnlock ? 'KHÓA' : 'MỞ KHÓA'}
                 </Text>
             </View>
             <Switch
                 trackColor={{ false: color.gray, true: color.gray }}
                 thumbColor={'white'}
-                value={status}
-                onValueChange={async () => {
-                    setStatus(!status)
-                    // await schedulePushNotification(
-                    //     'Successful',
-                    //     status
-                    //         ? 'Door has been locked'
-                    //         : 'Door has been unlocked'
-                    // )
+                value={!isUnlock}
+                onValueChange={() => {
+                    dispatch(updateDoor({ status: !isUnlock }))
+                    if (!isUnlock) handleUnlockDoor()
+                    else handleLockDoor()
                 }}
             />
         </View>

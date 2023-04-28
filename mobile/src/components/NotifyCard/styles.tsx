@@ -29,6 +29,9 @@ const styles = StyleSheet.create({
     header__alert: {
         color: color.yellow,
     },
+    header__read: {
+        color: color.grayText,
+    },
     button: {
         color: color.red,
     },

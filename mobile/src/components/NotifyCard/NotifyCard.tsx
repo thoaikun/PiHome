@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { Pressable, Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
-import AlertSignIcon from '../../../assets/svg/alert_icon.svg'
+import AlertSignIconUnRead from '../../../assets/svg/alert_icon.svg'
+import AlertSignIconRead from '../../../assets/svg/alert_read_icon.svg'
 import CancelIcon from '../../../assets/svg/cancel_icon.svg'
-import WarningSignIcon from '../../../assets/svg/warning_icon.svg'
-import { removeNotify } from '../../redux/slice/notificationSlice'
+import WarningSignIconUnRead from '../../../assets/svg/warning_icon.svg'
+import WarningSignIconRead from '../../../assets/svg/warning_read_icon.svg'
+import { removeNotify, setIsRead } from '../../redux/slice/notificationSlice'
 import text from '../../styles/text'
 import styles from './styles'
 
@@ -15,9 +17,10 @@ import styles from './styles'
 */
 
 const NotifyCard = (props: {
+    id: number
     type: string
     message: string
-    id: number
+    isRead: boolean
 }): JSX.Element => {
     const dispatch = useDispatch()
 
@@ -25,13 +28,27 @@ const NotifyCard = (props: {
         dispatch(removeNotify({ id }))
     }
 
+    const handleFocus = (id: number) => {
+        dispatch(setIsRead({ id }))
+    }
+
     return (
-        <View style={styles.container}>
+        <Pressable
+            style={styles.container}
+            onPress={() => handleFocus(props.id)}
+        >
             <View style={styles.col1}>
-                {props.type === 'Warning' ? (
-                    <WarningSignIcon width={30} height={30} />
-                ) : (
-                    <AlertSignIcon width={30} height={30} />
+                {props.type === 'Warning' && !props.isRead && (
+                    <WarningSignIconUnRead width={30} height={30} />
+                )}
+                {props.type === 'Warning' && props.isRead && (
+                    <WarningSignIconRead width={30} height={30} />
+                )}
+                {props.type === 'Alert' && !props.isRead && (
+                    <AlertSignIconUnRead width={30} height={30} />
+                )}
+                {props.type === 'Alert' && props.isRead && (
+                    <AlertSignIconUnRead width={30} height={30} />
                 )}
                 <View style={styles.content}>
                     <Text
@@ -42,12 +59,18 @@ const NotifyCard = (props: {
                             props.type === 'Warning'
                                 ? styles.header__warning
                                 : styles.header__alert,
+                            props.isRead ? styles.header__read : null,
                         ]}
                     >
                         {props.type === 'Warning' ? 'Cảnh báo' : 'Báo động'}
                     </Text>
                     <Text
-                        style={[text.bold, text.size_small, text.color_back]}
+                        style={[
+                            text.bold,
+                            text.size_small,
+                            text.color_back,
+                            props.isRead ? styles.header__read : null,
+                        ]}
                         numberOfLines={2}
                     >
                         {props.message}
@@ -57,7 +80,7 @@ const NotifyCard = (props: {
             <Pressable onPress={() => handleRemove(props.id)}>
                 <CancelIcon width={30} height={30} />
             </Pressable>
-        </View>
+        </Pressable>
     )
 }
 

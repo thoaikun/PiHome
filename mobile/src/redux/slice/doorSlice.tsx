@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export type Door = {
-    status: string
+    isUnlock: boolean
 }
 
 const initValue: Door = {
-    status: 'unlock',
+    isUnlock: false,
 }
 
 const doorSlice = createSlice({
@@ -13,9 +13,7 @@ const doorSlice = createSlice({
     initialState: initValue,
     reducers: {
         updateDoor: (state, action) => {
-            if (action.payload !== '') {
-                state.status = action.payload?.status
-            }
+            if (action.payload) state.isUnlock = action.payload?.status
         },
     },
 })

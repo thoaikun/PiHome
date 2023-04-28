@@ -23,7 +23,8 @@ const useSocket = (socket: Socket) => {
         dispatch(updateHumidity(JSON.parse(message)))
     }
     const onDoorUpdate = (message: string) => {
-        dispatch(updateDoor(message))
+        dispatch(updateDoor(JSON.parse(message)))
+        console.log(JSON.parse(message))
     }
     const onSpeakerUpdate = (message: string) => {
         dispatch(updateSpeaker(message))

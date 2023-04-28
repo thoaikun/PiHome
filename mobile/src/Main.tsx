@@ -23,7 +23,7 @@ import socket from './utils/socket'
 const Main = (): JSX.Element => {
     const theme = useSelector(themeSelector)
     useSocket(socket)
-    // const { schedulePushNotification } = useNotifications()
+    const { schedulePushNotification } = useNotifications()
     const dispatch = useDispatch()
 
     const thiefStatus = useSelector(thiefSelector)
@@ -33,7 +33,7 @@ const Main = (): JSX.Element => {
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
-            // await schedulePushNotification(title, message)
+            await schedulePushNotification(title, message)
             dispatch(addNotify({ title, message }))
         }
 
@@ -45,7 +45,7 @@ const Main = (): JSX.Element => {
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
-            // await schedulePushNotification(title, message)
+            await schedulePushNotification(title, message)
             dispatch(addNotify({ title, message }))
         }
 
@@ -57,7 +57,7 @@ const Main = (): JSX.Element => {
 
     React.useEffect(() => {
         const sendNotify = async (title: string, message: string) => {
-            // await schedulePushNotification(title, message)
+            await schedulePushNotification(title, message)
             dispatch(addNotify({ title, message }))
         }
 

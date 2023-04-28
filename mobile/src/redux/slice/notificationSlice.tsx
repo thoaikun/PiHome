@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export type NotifyElement = {
     title: string
     message: string
+    isRead: boolean
 }
 
 export type Notification = {
@@ -24,17 +25,20 @@ const notificationSlice = createSlice({
     initialState: initValue,
     reducers: {
         updateEarthquakeStatus: (state, action) => {
-            if (action.payload !== '') {
+            if (action.payload && action.payload?.status != state.earthquake) {
                 state.earthquake = action.payload?.status
             }
         },
         updateFireStatus: (state, action) => {
-            if (action.payload !== '') {
+            if (action.payload && action.payload?.status != state.fire) {
                 state.fire = action.payload?.status
             }
         },
         updateThiefStatus: (state, action) => {
-            if (action.payload !== '') {
+            if (
+                action.payload !== '' &&
+                action.payload?.status != state.thief
+            ) {
                 state.thief = action.payload?.status
             }
         },
@@ -43,6 +47,7 @@ const notificationSlice = createSlice({
                 let data: NotifyElement = {
                     title: action.payload.title,
                     message: action.payload.message,
+                    isRead: false,
                 }
                 state.list.unshift(data)
             }
@@ -54,6 +59,14 @@ const notificationSlice = createSlice({
                 )
             }
         },
+        setIsRead: (state, action) => {
+            if (action.payload) {
+                state.list.forEach((element, i) => {
+                    if (i == action.payload.id) element.isRead = true
+                    return element
+                })
+            }
+        },
     },
 })
 
@@ -63,6 +76,7 @@ export const {
     updateThiefStatus,
     addNotify,
     removeNotify,
+    setIsRead,
 } = notificationSlice.actions
 
 export default notificationSlice

@@ -13,7 +13,7 @@ const NotifyScreen = (): JSX.Element => {
 
     return (
         <View style={styles.container}>
-            <Title name='Thông báo' />
+            <Title name='Thông báo' style={{ height: 80 }} />
             <ScrollView contentContainerStyle={styles.notify}>
                 {list.length > 0 &&
                     list.map((element: NotifyElement, i: number) => (
@@ -22,6 +22,7 @@ const NotifyScreen = (): JSX.Element => {
                             type={element.title}
                             message={element.message}
                             id={i}
+                            isRead={element.isRead}
                         />
                     ))}
                 {list.length == 0 && (

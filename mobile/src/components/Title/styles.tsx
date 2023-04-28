@@ -6,9 +6,7 @@ var maxWidth = Dimensions.get('window').width //full width
 const styles = StyleSheet.create({
     container: {
         width: maxWidth,
-        height: 80,
         alignItems: 'center',
-        position: 'relative',
     },
     header: {
         width: '85%',

@@ -16,15 +16,17 @@ class HumidityController implements Subscriber {
 
     public update(context): void {
         this.socket.emit('transmission', context)
-        
-        DeviceModel.deleteMany({ type: "Humidity" }).then(() => {
-            let model = new HumidityModel({
-                value: context.data.humidity,
+
+        DeviceModel.deleteMany({ type: 'Humidity' })
+            .then(() => {
+                let model = new HumidityModel({
+                    value: context.data.humidity,
+                })
+                model.save().then(() => console.log('database is updated')) // Success
             })
-            model.save().then(() => console.log('database is updated')) // Success
-        }).catch(function (error) {
-            console.log(error); // Failure
-        });
+            .catch(function (error) {
+                console.log(error) // Failure
+            })
     }
 
     public getSocket(): Socket {

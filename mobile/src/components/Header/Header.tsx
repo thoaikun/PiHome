@@ -12,6 +12,7 @@ import styles from './styles'
 const Header = ({ navigation }: any): JSX.Element => {
     const themeColor = useTheme()
     const list = useSelector(notifyListSelector)
+    const hasUnreadNotify = list.filter((e) => e.isRead === false).length > 0
 
     return (
         <View style={styles.container}>
@@ -21,13 +22,12 @@ const Header = ({ navigation }: any): JSX.Element => {
                     style={styles.image}
                 />
                 <View style={styles.btn}>
-                    <VoiceButton />
                     <Pressable
                         onPress={() => {
                             navigation.navigate('Notification')
                         }}
                     >
-                        <IconWrapper color='white' isBell={list.length !== 0}>
+                        <IconWrapper color='white' isBell={hasUnreadNotify}>
                             <BellIcon width={25} height={20} />
                         </IconWrapper>
                     </Pressable>

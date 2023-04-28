@@ -17,14 +17,16 @@ class TemperatureController implements Subscriber {
     public update(context): void {
         this.socket.emit('transmission', context)
 
-        DeviceModel.deleteMany({ type: "Temperature" }).then(() => {
-            let model = new TemperatureModel({
-                value: context.data.temperature,
+        DeviceModel.deleteMany({ type: 'Temperature' })
+            .then(() => {
+                let model = new TemperatureModel({
+                    value: context.data.temperature,
+                })
+                model.save().then(() => console.log('database is updated')) // Success
             })
-            model.save().then(() => console.log('database is updated')) // Success
-        }).catch(function (error) {
-            console.log(error); // Failure
-        });
+            .catch(function (error) {
+                console.log(error) // Failure
+            })
     }
 
     public getSocket(): Socket {

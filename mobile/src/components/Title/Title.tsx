@@ -7,11 +7,11 @@ import IconWrapper from '../IconWrapper/IconWrapper'
 import style from '../NavBar/styles'
 import styles from './styles'
 
-const Title = (props: { name: string }): JSX.Element => {
+const Title = (props: { name: string; style?: any }): JSX.Element => {
     const themeColor = useTheme()
     const navigation = useNavigation()
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, props.style]}>
             <View style={styles.header}>
                 <Pressable
                     onPress={() => {

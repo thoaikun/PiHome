@@ -1,6 +1,10 @@
 import * as mqtt from 'mqtt'
 import Publisher from './publisher'
-import { ADAFRUIT_IO_FEEDS, ADAFRUIT_IO_KEY, ADAFRUIT_IO_USERNAME } from '../config/adafruit'
+import {
+    ADAFRUIT_IO_FEEDS,
+    ADAFRUIT_IO_KEY,
+    ADAFRUIT_IO_USERNAME,
+} from '../config/adafruit'
 
 class MqttClient extends Publisher {
     private client: mqtt.MqttClient

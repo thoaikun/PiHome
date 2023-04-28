@@ -17,14 +17,16 @@ class EarthquakeController implements Subscriber {
     public update(context): void {
         this.socket.emit('transmission', context)
 
-        NotificationModel.deleteMany({ type: "Earthquake" }).then(() => {
-            let model = new EarthquakeModel({
-                status: context.data.status,
+        NotificationModel.deleteMany({ type: 'Earthquake' })
+            .then(() => {
+                let model = new EarthquakeModel({
+                    status: context.data.status,
+                })
+                model.save().then(() => console.log('database is updated')) // Success
             })
-            model.save().then(() => console.log('database is updated')) // Success
-        }).catch(function (error) {
-            console.log(error); // Failure
-        });
+            .catch(function (error) {
+                console.log(error) // Failure
+            })
     }
 
     public getSocket(): Socket {
