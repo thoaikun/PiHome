@@ -1,31 +1,25 @@
 import { io, Socket } from "socket.io-client";
-import MqttClient from "../../utils/mqttClient";
 import Subscriber from "../../utils/subscriber";
-import { ADAFRUIT_IO_FEEDS } from "../../config/adafruit";
-import { DeviceModel, DoorModel } from "../model/device.model";
+import { NotificationModel, ThiefModel } from "../model/notification.model";
 
-class DoorController implements Subscriber {
+class ThiefController implements Subscriber {
   private socket: Socket;
-  private name: String = "doorController";
+  private name: String = "thiefController";
 
-  constructor(mqttClient: MqttClient, topic: string) {
+  constructor() {
     this.socket = io("http://localhost:3000");
 
     this.socket.on("connect", () => {
       this.socket.emit("join controller room", this.name);
-    });
-
-    this.socket.on(`client to ${this.name}`, (message: string) => {
-      mqttClient.sendMessage(ADAFRUIT_IO_FEEDS + topic, message);
     });
   }
 
   public update(context): void {
     this.socket.emit("transmission", context);
 
-    DeviceModel.deleteMany({ type: "Door" })
+    NotificationModel.deleteMany({ type: "Thief" })
       .then(() => {
-        let model = new DoorModel({
+        let model = new ThiefModel({
           status: context.data.status,
         });
         model.save().then(() => console.log("database is updated")); // Success
@@ -40,4 +34,4 @@ class DoorController implements Subscriber {
   }
 }
 
-export default DoorController;
+export default ThiefController;
