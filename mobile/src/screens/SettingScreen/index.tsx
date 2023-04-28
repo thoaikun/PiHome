@@ -4,13 +4,14 @@ import { Image, ListRenderItemInfo, Pressable, Text, View } from 'react-native'
 import InfoIcon from '../../../assets/svg/info_icon.svg'
 import LogoutIcon from '../../../assets/svg/logout.svg'
 import DarkModeCard from '../../components/DarkModeCard/DarkModeCard'
-import NotifyCard from '../../components/NotifyCard/NotifyCard'
-import Title from '../../components/Title/Title'
+import { useDispatch } from 'react-redux'
+import { updateLogout } from '../../redux/slice/loginSlice'
 import styles from './styles'
 const SettingScreen = (): JSX.Element => {
     const themeColor = useTheme()
     const [pressed, setPressed] = React.useState<boolean>(false)
     const navigation = useNavigation()
+    const dispatch = useDispatch()
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -24,8 +25,11 @@ const SettingScreen = (): JSX.Element => {
                     Thoai Le
                 </Text>
                 <Pressable
-                    onPressIn={() => setPressed(true)}
-                    onPressOut={() => setPressed(false)}
+                    onPress={() => {
+                        setPressed(!pressed)
+                        dispatch(updateLogout())
+                        navigation.navigate('Login')
+                    }}
                 >
                     <LogoutIcon
                         width={40}

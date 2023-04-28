@@ -11,14 +11,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     input: {
-        paddingBottom: 10,
         paddingHorizontal: 15,
+        height: 45,
         backgroundColor: 'white',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-    },
-    mt: {
-        marginTop: 10,
     },
 })
 

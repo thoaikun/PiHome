@@ -11,6 +11,7 @@ const color = {
     focusPrimary: '#5E68D4',
     lightText: 'white',
     darkText: '#000000',
+    grayText: '#D9D9D9',
 }
 
 export default color

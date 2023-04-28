@@ -10,7 +10,7 @@ import text from '../../styles/text'
 import styles from './styles'
 const DarkModeCard = (): JSX.Element => {
     const themeColor = useTheme()
-    const [status, setStatus] = React.useState<boolean>(false)
+    const [status, setStatus] = React.useState<boolean>(themeColor.dark)
     const dispatch = useDispatch()
 
     const handleChangeStatus = () => {

@@ -8,14 +8,20 @@ const styles = StyleSheet.create({
     container: {
         width: maxWidth,
         height: maxHeight,
+        position: 'relative',
     },
     notify: {
         width: maxWidth,
-        marginTop: 110,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         gap: 15,
+        paddingBottom: 80,
+        paddingTop: 10,
+    },
+    text: {
+        fontSize: 20,
+        color: color.darkBackground,
     },
 })
 

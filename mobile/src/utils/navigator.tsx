@@ -7,6 +7,7 @@ type HomeStackParamList = {
     Kitchen: undefined
     Bedroom: undefined
     Toilet: undefined
+    Login: undefined
 }
 
 type AppTabParamList = {

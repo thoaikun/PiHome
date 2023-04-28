@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StatusBar, StyleSheet } from 'react-native'
 import color from '../../styles/color'
 
 var maxWidth = Dimensions.get('window').width //full width
@@ -6,11 +6,6 @@ var maxWidth = Dimensions.get('window').width //full width
 const styles = StyleSheet.create({
     container: {
         width: maxWidth,
-
-        position: 'absolute',
-        left: 0,
-        top: 45,
-
         alignItems: 'center',
     },
     header: {
@@ -19,6 +14,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
+
+        position: 'absolute',
+        marginTop:
+            Platform.OS === 'android' && StatusBar.currentHeight
+                ? StatusBar?.currentHeight
+                : 0,
     },
     title: {
         marginLeft: 0,

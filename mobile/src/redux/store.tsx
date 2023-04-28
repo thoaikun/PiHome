@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
-import themeSlice from './slice/themeSlice'
-import temperatureSlice from './slice/temperatureSlice'
-import humiditySlice from './slice/humiditySlice'
 import doorSlice from './slice/doorSlice'
-import speakerSlice from './slice/speakerSlice'
-import lightSlice from './slice/lightSlice'
 import fanSlice from './slice/fanSlice'
+import humiditySlice from './slice/humiditySlice'
+import lightSlice from './slice/lightSlice'
+import loginSlice from './slice/loginSlice'
+import notificationSlice from './slice/notificationSlice'
+import speakerSlice from './slice/speakerSlice'
+import temperatureSlice from './slice/temperatureSlice'
+import themeSlice from './slice/themeSlice'
 
 const store = configureStore({
     reducer: {
@@ -16,6 +18,8 @@ const store = configureStore({
         light: lightSlice.reducer,
         fan: fanSlice.reducer,
         speaker: speakerSlice.reducer,
+        notification: notificationSlice.reducer,
+        login: loginSlice.reducer,
     },
 })
 

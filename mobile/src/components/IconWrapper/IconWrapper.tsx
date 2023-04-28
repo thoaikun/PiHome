@@ -7,9 +7,10 @@ import styles from './styles'
 const IconWrapper = (props: {
     color: string
     children: JSX.Element
+    isBell?: boolean | null
 }): JSX.Element => {
     return (
-        <View>
+        <View style={styles.container}>
             <View
                 style={{
                     ...styles.iconBackground,
@@ -18,6 +19,7 @@ const IconWrapper = (props: {
             >
                 {props.children}
             </View>
+            {props.isBell && <View style={styles.hasNotify}></View>}
         </View>
     )
 }
