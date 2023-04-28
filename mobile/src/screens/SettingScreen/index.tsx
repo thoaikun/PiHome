@@ -1,10 +1,10 @@
 import { useNavigation, useTheme } from '@react-navigation/native'
 import * as React from 'react'
 import { Image, ListRenderItemInfo, Pressable, Text, View } from 'react-native'
+import { useDispatch } from 'react-redux'
 import InfoIcon from '../../../assets/svg/info_icon.svg'
 import LogoutIcon from '../../../assets/svg/logout.svg'
 import DarkModeCard from '../../components/DarkModeCard/DarkModeCard'
-import { useDispatch } from 'react-redux'
 import { updateLogout } from '../../redux/slice/loginSlice'
 import styles from './styles'
 const SettingScreen = (): JSX.Element => {

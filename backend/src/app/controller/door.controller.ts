@@ -34,20 +34,6 @@ class DoorController implements Subscriber {
                 console.log(error) // Failure
             })
     }
-    public update(context): void {
-        this.socket.emit('transmission', context)
-
-        DeviceModel.deleteMany({ type: 'Door' })
-            .then(() => {
-                let model = new DoorModel({
-                    status: context.data.status,
-                })
-                model.save().then(() => console.log('database is updated')) // Success
-            })
-            .catch(function (error) {
-                console.log(error) // Failure
-            })
-    }
 
     public getSocket(): Socket {
         return this.socket

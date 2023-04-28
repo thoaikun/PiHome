@@ -7,6 +7,7 @@ const Input = (props: {
     placeholder?: string
     focus?: boolean
     value: string
+    password?: boolean
     onChange?: (input: string) => void
 }): JSX.Element => {
     const [typing, setTyping] = React.useState<boolean>(false)
@@ -22,6 +23,7 @@ const Input = (props: {
                     else setTyping(true)
                 }}
                 focusable={props.focus}
+                secureTextEntry={props.password}
                 style={[styles.input, text.medium, text.size_medium]}
             />
         </View>

@@ -1,5 +1,5 @@
 interface Subscriber {
-  update(context: string): void;
+    update(context: string): void
 }
 
-export default Subscriber;
+export default Subscriber

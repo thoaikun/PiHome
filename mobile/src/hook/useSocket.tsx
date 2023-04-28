@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { Socket } from 'socket.io-client'
 import { updateDoor } from '../redux/slice/doorSlice'
 import { updateHumidity } from '../redux/slice/humiditySlice'
+import { updateLogin } from '../redux/slice/loginSlice'
 import {
     updateEarthquakeStatus,
     updateFireStatus,
@@ -44,6 +45,9 @@ const useSocket = (socket: Socket) => {
     const onEarthquake = (message: string) => {
         dispatch(updateEarthquakeStatus(JSON.parse(message)))
     }
+    const onLogin = (message: string) => {
+        dispatch(updateLogin(JSON.parse(message)))
+    }
 
     React.useEffect(() => {
         socket.on('connect', onConnect)
@@ -56,6 +60,7 @@ const useSocket = (socket: Socket) => {
         socket.on('thiefController to client', onThiefUpdate)
         socket.on('fireController to client', onFireUpdate)
         socket.on('earthquakeController to client', onEarthquake)
+        socket.on('authController to client', onLogin)
 
         return () => {
             socket.off('connect', onConnect)
@@ -68,6 +73,7 @@ const useSocket = (socket: Socket) => {
             socket.off('thiefController to client', onThiefUpdate)
             socket.off('fireController to client', onFireUpdate)
             socket.off('earthquakeController to client', onEarthquake)
+            socket.off('authController to client', onLogin)
         }
     }, [socket])
 }

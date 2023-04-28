@@ -41,7 +41,7 @@ const [
     'thief',
 ].map((item) => ({ feed: `pihome-${item}`, name: `${item}Controller` }))
 
-const authController: Subscriber = new AuthController()
+const authController: AuthController = new AuthController()
 const temperatureController: Subscriber = new TemperatureController()
 const humidityController: Subscriber = new HumidityController()
 const doorController: Subscriber = new DoorController(mqttClient, door.feed)

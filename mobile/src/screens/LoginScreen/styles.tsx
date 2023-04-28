@@ -1,16 +1,19 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import color from '../../styles/color'
+
 var maxWidth = Dimensions.get('window').width //full width
 var maxHeight = Dimensions.get('window').height //full height
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height: maxHeight,
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'relative',
     },
     logo: {
         width: maxWidth,
-        height: 410,
+        height: 400,
         position: 'absolute',
         left: 0,
         top: 0,
@@ -20,11 +23,15 @@ const styles = StyleSheet.create({
     },
     loginForm: {
         position: 'absolute',
+        bottom: maxHeight * 0.15,
         width: maxWidth - 10,
         flexDirection: 'column',
         alignItems: 'center',
         gap: 20,
-        top: 506,
+    },
+    alertText: {
+        color: color.red,
+        lineHeight: 20,
     },
 })
 
