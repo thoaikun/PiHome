@@ -1,10 +1,35 @@
 # PiHome
 
-PiHome is a smart home project that offers various features for home automation, security, and energy management.
+PiHome is a smart home project that provides a wide range of features for home automation, security, and energy management. With PiHome, homeowners can easily monitor and control various aspects of their home, including lighting, temperature, security, and more, all through a single application.
 
-<p align="center" style="padding: 20px">
+<p align="center" style="padding: 20px; width: 70px; height=70px">
   <img src="./logo.png" alt="PiHome">
 </p>
+
+## Technologies
+
+* Frontend: React Native
+
+* Backend: NodeJS + Socket.IO
+
+* Database: MongoDB
+
+## Feature
+
+1. Environmental Monitoring: With temperature and humidity sensors, PiHome allows you to monitor the status of the environment inside and around your home.
+
+2. Lighting and Fan Control via Smartphone: You can easily turn on and off lights and fans using your smartphone or other smart devices with the PiHome app.
+
+3. Smart Gate Light: By integrating a light sensor, the gate light will only turn on when it's dark outside or when someone is near the gate. This helps to conserve power usage and save energy.
+
+4. Security Alert System: The infrared sensor detects any intruders near the front door, and the alarm system sounds an alert.
+
+5. Smart Lock: The PiHome app also allows users to control smart locks, enter passcodes, and open or close the doors.
+
+6. Smoke Alarm: In case of a fire, the smoke sensor sounds an alarm, alerting the homeowner, and helps to prevent further damage.
+
+7. Earthquake Warning: With an attached acceleration sensor, PiHome can detect movements in the household, and sound the alarm accordingly.
+
 
 ## Getting Started
 
@@ -35,22 +60,6 @@ Once you have everything set up, you can begin by cloning this repository
             expo start
 
 -   Open expoGo on mobile device and scan the QR code.
-
-## Feature
-
-1. Environmental Monitoring: With temperature and humidity sensors, PiHome allows you to monitor the status of the environment inside and around your home.
-
-2. Lighting and Fan Control via Smartphone: You can easily turn on and off lights and fans using your smartphone or other smart devices with the PiHome app.
-
-3. Smart Gate Light: By integrating a light sensor, the gate light will only turn on when it's dark outside or when someone is near the gate. This helps to conserve power usage and save energy.
-
-4. Security Alert System: The infrared sensor detects any intruders near the front door, and the alarm system sounds an alert.
-
-5. Smart Lock: The PiHome app also allows users to control smart locks, enter passcodes, and open or close the doors.
-
-6. Smoke Alarm: In case of a fire, the smoke sensor sounds an alarm, alerting the homeowner, and helps to prevent further damage.
-
-7. Earthquake Warning: With an attached acceleration sensor, PiHome can detect movements in the household, and sound the alarm accordingly.
 
 ## Licensing
 
