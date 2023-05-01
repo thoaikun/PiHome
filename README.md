@@ -2,17 +2,17 @@
 
 PiHome is a smart home project that provides a wide range of features for home automation, security, and energy management. With PiHome, homeowners can easily monitor and control various aspects of their home, including lighting, temperature, security, and more, all through a single application.
 
-<p align="center" style="padding: 20px; width: 70px; height=70px">
-  <img src="./logo.png" alt="PiHome">
+<p align="center" style="padding: 10px;">
+    <img src="./logo.png" alt="PiHome" width=250>
 </p>
 
 ## Technologies
 
-* Frontend: React Native
+-   Frontend: React Native
 
-* Backend: NodeJS + Socket.IO
+-   Backend: NodeJS + Socket.IO
 
-* Database: MongoDB
+-   Database: MongoDB
 
 ## Feature
 
@@ -29,7 +29,6 @@ PiHome is a smart home project that provides a wide range of features for home a
 6. Smoke Alarm: In case of a fire, the smoke sensor sounds an alarm, alerting the homeowner, and helps to prevent further damage.
 
 7. Earthquake Warning: With an attached acceleration sensor, PiHome can detect movements in the household, and sound the alarm accordingly.
-
 
 ## Getting Started
 
