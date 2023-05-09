@@ -62,4 +62,4 @@ Once you have everything set up, you can begin by cloning this repository
 
 ## Licensing
 
-This project is created by "**"PonApetit"**"
+This project is created by "**"BonAppetit"**"
